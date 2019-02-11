@@ -1,4 +1,5 @@
 import axios from "axios";
+import _ from "lodash";
 
 const state = {
   dataLoading: true,
@@ -32,7 +33,20 @@ const actions = {
         `https://api.github.com/users/${username}/repos?per_page=100&sort=updated`
       )
       .then(response => {
-        context.commit("POPULATE_REPO_DATA", response.data);
+        const dateFilteredRepos = response.data.map(repo => {
+          let createdAt = new Date(repo.created_at);
+          repo.created_at = new Date(
+            createdAt.getFullYear(),
+            createdAt.getMonth(),
+            "01"
+          );
+          return repo;
+        });
+
+        context.commit(
+          "POPULATE_REPO_DATA",
+          _.groupBy(response.data, "language")
+        );
         context.commit("TURN_OFF_LOADER");
       })
       .catch(error => {
