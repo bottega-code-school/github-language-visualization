@@ -1,5 +1,6 @@
 import axios from "axios";
 import _ from "lodash";
+import moment from "moment";
 
 const state = {
   dataLoading: true,
@@ -33,20 +34,46 @@ const actions = {
         `https://api.github.com/users/${username}/repos?per_page=100&sort=updated`
       )
       .then(response => {
-        const dateFilteredRepos = response.data.map(repo => {
+        const responseWithFormattedRepoDates = response.data.map(repo => {
           let createdAt = new Date(repo.created_at);
           repo.created_at = new Date(
             createdAt.getFullYear(),
             createdAt.getMonth(),
             "01"
           );
+
+          repo.created_at = moment(repo.created_at).format("DD/MM/YYYY");
+
           return repo;
         });
 
-        context.commit(
-          "POPULATE_REPO_DATA",
-          _.groupBy(response.data, "language")
+        const groupByLanguage = _.groupBy(
+          responseWithFormattedRepoDates,
+          "language"
         );
+        const dataKeys = Object.keys(groupByLanguage);
+
+        const visualizationDataObject = dataKeys.map(language => {
+          const monthlyRepoObj = _.countBy(groupByLanguage[language], function(
+            repo
+          ) {
+            return repo.created_at;
+          });
+
+          const monthlyRepoCounts = Object.keys(monthlyRepoObj).map(date => {
+            return {
+              date: date,
+              value: monthlyRepoObj[date]
+            };
+          });
+
+          return {
+            name: language,
+            values: monthlyRepoCounts
+          };
+        });
+
+        context.commit("POPULATE_REPO_DATA", visualizationDataObject);
         context.commit("TURN_OFF_LOADER");
       })
       .catch(error => {
