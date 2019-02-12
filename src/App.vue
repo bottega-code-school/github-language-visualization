@@ -1,5 +1,7 @@
 <template>
   <div id="app">
+    <Search />
+
     <graph v-if="currentRepoData.length > 0" v-bind="graphData" />
   </div>
 </template>
@@ -7,13 +9,15 @@
 <script>
 import { mapActions, mapGetters } from 'vuex';
 
+import Search from "./components/Search";
 import Graph from "./components/Graph";
 
 export default {
   name: "App",
 
   components: {
-    Graph
+    Graph,
+    Search
   },
 
   mounted() {
