@@ -28,13 +28,28 @@ const mutations = {
 };
 
 const actions = {
-  getData: (context, username) => {
+  getData: (context, filterObject) => {
     axios
       .get(
-        `https://api.github.com/users/${username}/repos?per_page=100&sort=updated`
+        `https://api.github.com/users/${filterObject.username}/repos?per_page=100&sort=updated`
       )
       .then(response => {
-        const responseWithFormattedRepoDates = response.data.map(repo => {
+        const filteredDateRange = response.data.filter(repo => {
+          let projectCreationDate = new Date(repo.created_at);
+          var startDate = new Date("2018", "02", "13");
+          var endDate = new Date("2019", "02", "13");
+
+          if (
+            projectCreationDate >= startDate &&
+            projectCreationDate <= endDate
+          ) {
+            return true;
+          } else {
+            return false;
+          }
+        });
+
+        const responseWithFormattedRepoDates = filteredDateRange.map(repo => {
           let createdAt = new Date(repo.created_at);
           repo.created_at = new Date(
             createdAt.getFullYear(),
