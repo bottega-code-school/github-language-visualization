@@ -35,9 +35,10 @@ const actions = {
       )
       .then(response => {
         const filteredDateRange = response.data.filter(repo => {
-          let projectCreationDate = new Date(repo.created_at);
-          var startDate = new Date("2018", "02", "13");
-          var endDate = new Date("2019", "02", "13");
+          let projectCreationDate = moment(repo.created_at);
+          var startDate =
+            filterObject.startDate || moment().subtract(1, "year");
+          var endDate = filterObject.endDate || moment();
 
           if (
             projectCreationDate >= startDate &&
@@ -50,14 +51,9 @@ const actions = {
         });
 
         const responseWithFormattedRepoDates = filteredDateRange.map(repo => {
-          let createdAt = new Date(repo.created_at);
-          repo.created_at = new Date(
-            createdAt.getFullYear(),
-            createdAt.getMonth(),
-            "01"
-          );
-
-          repo.created_at = moment(repo.created_at).format("DD/MM/YYYY");
+          repo.created_at = moment(repo.created_at)
+            .startOf("month")
+            .format("DD/MM/YYYY");
 
           return repo;
         });
