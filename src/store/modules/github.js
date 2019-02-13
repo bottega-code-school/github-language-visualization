@@ -1,6 +1,8 @@
 import axios from "axios";
 import _ from "lodash";
-import moment from "moment";
+import Moment from "moment";
+import { extendMoment } from "moment-range";
+const moment = extendMoment(Moment);
 
 const state = {
   dataLoading: true,
@@ -34,12 +36,16 @@ const actions = {
         `https://api.github.com/users/${filterObject.username}/repos?per_page=100&sort=updated`
       )
       .then(response => {
+        var startDate = filterObject.startDate || moment().subtract(1, "year");
+        var endDate = filterObject.endDate || moment();
+        var dateRangeArray = Array.from(
+          moment()
+            .range(startDate, endDate)
+            .by("month")
+        );
+
         const filteredDateRange = response.data.filter(repo => {
           let projectCreationDate = moment(repo.created_at);
-          var startDate =
-            filterObject.startDate || moment().subtract(1, "year");
-          var endDate = filterObject.endDate || moment();
-
           if (
             projectCreationDate >= startDate &&
             projectCreationDate <= endDate
@@ -75,15 +81,19 @@ const actions = {
           .map(language => {
             const monthlyRepoObj = _.countBy(
               groupByLanguage[language],
-              function(repo) {
+              repo => {
                 return repo.created_at;
               }
             );
 
-            const monthlyRepoCounts = Object.keys(monthlyRepoObj).map(date => {
+            const monthlyRepoCounts = dateRangeArray.map(date => {
+              let dateFromRange = moment(date)
+                .startOf("month")
+                .format("DD/MM/YYYY");
+
               return {
-                date: date,
-                value: monthlyRepoObj[date]
+                date: dateFromRange,
+                value: monthlyRepoObj[dateFromRange] || 0
               };
             });
 
@@ -93,8 +103,6 @@ const actions = {
             };
           })
           .reverse();
-
-        debugger;
 
         context.commit("POPULATE_REPO_DATA", visualizationDataObject);
         context.commit("TURN_OFF_LOADER");
