@@ -50,7 +50,14 @@ const actions = {
           }
         });
 
-        const responseWithFormattedRepoDates = filteredDateRange.map(repo => {
+        const reposSortedByDate = filteredDateRange.sort(function compare(
+          prev,
+          next
+        ) {
+          return moment(prev.created_at) - moment(next.created_at);
+        });
+
+        const responseWithFormattedRepoDates = reposSortedByDate.map(repo => {
           repo.created_at = moment(repo.created_at)
             .startOf("month")
             .format("DD/MM/YYYY");
@@ -64,25 +71,30 @@ const actions = {
         );
         const dataKeys = Object.keys(groupByLanguage);
 
-        const visualizationDataObject = dataKeys.map(language => {
-          const monthlyRepoObj = _.countBy(groupByLanguage[language], function(
-            repo
-          ) {
-            return repo.created_at;
-          });
+        const visualizationDataObject = dataKeys
+          .map(language => {
+            const monthlyRepoObj = _.countBy(
+              groupByLanguage[language],
+              function(repo) {
+                return repo.created_at;
+              }
+            );
 
-          const monthlyRepoCounts = Object.keys(monthlyRepoObj).map(date => {
+            const monthlyRepoCounts = Object.keys(monthlyRepoObj).map(date => {
+              return {
+                date: date,
+                value: monthlyRepoObj[date]
+              };
+            });
+
             return {
-              date: date,
-              value: monthlyRepoObj[date]
+              name: language,
+              values: monthlyRepoCounts
             };
-          });
+          })
+          .reverse();
 
-          return {
-            name: language,
-            values: monthlyRepoCounts
-          };
-        });
+        debugger;
 
         context.commit("POPULATE_REPO_DATA", visualizationDataObject);
         context.commit("TURN_OFF_LOADER");
