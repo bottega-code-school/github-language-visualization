@@ -10,7 +10,7 @@
 
 @mixin titillium-web-regular {
   font-family: "Titillium Web", Roboto, sans-serif;
-  font-weight: 400; /* https://stackoverflow.com/questions/31056543/safari-font-rendering-issues/37365794#37365794 */
+  font-weight: 400;
 }
 
 @mixin helvetica-neue {

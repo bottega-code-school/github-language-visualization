@@ -2,7 +2,7 @@
   <div id="app">
     <div class="app-container">
       <Search />
-      <graph v-if="currentRepoData.length > 0" v-bind="graphData" />
+      <Graph v-if="currentRepoData.length > 0" v-bind="graphData" />
     </div>
   </div>
 </template>
