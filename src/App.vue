@@ -1,8 +1,9 @@
 <template>
   <div id="app">
-    <Search />
-
-    <graph v-if="currentRepoData.length > 0" v-bind="graphData" />
+    <div class="app-container">
+      <Search />
+      <graph v-if="currentRepoData.length > 0" v-bind="graphData" />
+    </div>
   </div>
 </template>
 
@@ -21,7 +22,7 @@ export default {
   },
 
   mounted() {
-    this.getData('jordanhudgens');
+    this.getData({ username: 'jordanhudgens' });
   },
 
   computed: {

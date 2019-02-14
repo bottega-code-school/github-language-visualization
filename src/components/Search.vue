@@ -1,8 +1,10 @@
 <template>
   <div class="search-form-wrapper">
-    <form @submit.prevent="handleSearch">
+    <form @submit.prevent="handleSearch" class="search-wrapper">
       <input v-model="username" type="text">
-      <button type="submit">Search</button>
+      <button type="submit" class="search-button">
+        <i class="fas fa-search"></i>
+      </button>
     </form>
   </div>
 </template>
@@ -25,7 +27,7 @@ export default {
     ]),
 
     handleSearch() {
-      this.getData(this.username);
+      this.getData({ username: this.username });
     }
   }
 }
