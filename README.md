@@ -40,6 +40,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ### For a B, you will need to add:
 
+- [ ] Change from line graph to stack graph
 - [ ] Display and compare to the average temporal data on request. (example?)
 - [x] Allow secondary profile selection from a US map or a network or a cloud.
 - [x] Highlight the profile on the secondary profile selection when mousing over a time series.

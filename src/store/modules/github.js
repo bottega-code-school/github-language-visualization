@@ -6,7 +6,8 @@ const moment = extendMoment(Moment);
 
 const state = {
   dataLoading: true,
-  repoData: []
+  repoData: [],
+  profile: {}
 };
 
 const getters = {
@@ -16,6 +17,10 @@ const getters = {
 
   currentRepoData: state => {
     return state.repoData;
+  },
+
+  currentProfile: state => {
+    return state.profile;
   }
 };
 
@@ -26,10 +31,25 @@ const mutations = {
 
   POPULATE_REPO_DATA: (state, repos) => {
     state.repoData = repos;
+  },
+
+  POPULATE_PROFILE_DATA: (state, profile) => {
+    state.profile = profile;
   }
 };
 
 const actions = {
+  getUserProfileData: (context, username) => {
+    axios
+      .get(`https://api.github.com/users/${username}`)
+      .then(response => {
+        context.commit("POPULATE_PROFILE_DATA", response.data);
+      })
+      .catch(error => {
+        console.log("getUserProfileData", error);
+      });
+  },
+
   getData: (context, filterObject) => {
     axios
       .get(

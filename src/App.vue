@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <div class="app-container">
+      <!-- <pre>{{currentProfile}}</pre> -->
       <Search />
       <Graph v-if="currentRepoData.length > 0" v-bind="graphData" />
     </div>
@@ -23,11 +24,13 @@ export default {
 
   mounted() {
     this.getData({ username: 'jordanhudgens' });
+    this.getUserProfileData('jordanhudgens');
   },
 
   computed: {
     ...mapGetters([
       'currentRepoData',
+      'currentProfile'
     ]),
 
     graphData() {
@@ -45,7 +48,8 @@ export default {
 
   methods: {
     ...mapActions([
-      'getData'
+      'getData',
+      'getUserProfileData'
     ]),
   }
 }
