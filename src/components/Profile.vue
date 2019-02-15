@@ -3,7 +3,9 @@
     <div v-if="profile" class="profile-card">
       <div class="left-column">
         <div v-if="profile.avatar_url" class="avatar">
-          <img :src="profile.avatar_url" alt="avatar">
+          <a :href="profile.html_url" target="_blank">
+            <img :src="profile.avatar_url" alt="avatar">
+          </a>
         </div>
 
         <div class="user-data">
