@@ -11,6 +11,10 @@ body {
   }
 }
 
+a {
+  text-decoration: none;
+}
+
 $transition-time: 0.1s;
 
 %transition-all-ease {

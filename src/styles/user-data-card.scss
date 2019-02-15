@@ -1,5 +1,6 @@
 .user-data-cards {
   display: flex;
+  @include titillium-web-bold();
 
   .user-data-card {
     padding: 15px;
@@ -8,5 +9,19 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    background-color: $primary;
+    margin: 21px;
+    border-radius: 3px;
+    border: 1px solid $offwhite;
+    color: $white;
+
+    .title {
+      font-size: 0.8em;
+      text-transform: uppercase;
+    }
+
+    .count {
+      font-size: 2em;
+    }
   }
 }

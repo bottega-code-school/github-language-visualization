@@ -18,10 +18,12 @@
       </div>
 
       <div class="user-data-cards">
-        <div class="user-data-card">
-          <div class="count">294</div>
-          <div class="title">Repos</div>
-        </div>
+        <a href="/">
+          <div class="user-data-card">
+            <div class="count">294</div>
+            <div class="title">Repos</div>
+          </div>
+        </a>
 
         <div class="user-data-card">
           <div class="count">390</div>
