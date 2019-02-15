@@ -1,7 +1,7 @@
 <template>
   <div class="search-wrapper">
     <form @submit.prevent="handleSearch" class="search-form">
-      <input v-model="username" type="text" placeholder="GitHub Username">
+      <input v-model="username" type="text" placeholder="GitHub Username" spellcheck="false">
       <button type="submit" class="search-button">
         <i class="fas fa-search"></i>
       </button>
@@ -23,11 +23,13 @@ export default {
 
   methods: {
     ...mapActions([
-      'getData'
+      'getData',
+      'getUserProfileData'
     ]),
 
     handleSearch() {
       this.getData({ username: this.username });
+      this.getUserProfileData(this.username);
     }
   }
 }

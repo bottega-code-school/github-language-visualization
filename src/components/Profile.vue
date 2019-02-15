@@ -10,7 +10,7 @@
 
         <div class="user-data">
           <div class="name">
-            <a :href="profile.html_url" target="_blank">{{profile.name}}</a>
+            <a :href="profile.html_url" target="_blank">{{profile.name || profile.login}}</a>
           </div>
 
           <div class="bio">
@@ -20,7 +20,7 @@
       </div>
 
       <div class="user-data-cards">
-        <a href="/">
+        <a :href="`https://github.com/${profile.login}?tab=repositories`" target="_blank">
           <div class="user-data-card">
             <i class="fas fa-code"></i>
             <div class="count">{{profile.public_repos}}</div>
@@ -28,23 +28,29 @@
           </div>
         </a>
 
-        <div class="user-data-card">
-          <i class="far fa-sticky-note"></i>
-          <div class="count">{{profile.public_gists}}</div>
-          <div class="title">Gists</div>
-        </div>
+        <a :href="`https://gist.github.com/${profile.login}`" target="_blank">
+          <div class="user-data-card">
+            <i class="far fa-sticky-note"></i>
+            <div class="count">{{profile.public_gists}}</div>
+            <div class="title">Gists</div>
+          </div>
+        </a>
 
-        <div class="user-data-card">
-          <i class="fas fa-users"></i>
-          <div class="count">{{profile.followers}}</div>
-          <div class="title">Followers</div>
-        </div>
+        <a :href="`https://github.com/${profile.login}?tab=followers`" target="_blank">
+          <div class="user-data-card">
+            <i class="fas fa-users"></i>
+            <div class="count">{{profile.followers}}</div>
+            <div class="title">Followers</div>
+          </div>
+        </a>
 
-        <div class="user-data-card">
-          <i class="fas fa-user-check"></i>
-          <div class="count">{{profile.following}}</div>
-          <div class="title">Following</div>
-        </div>
+        <a :href="`https://github.com/${profile.login}?tab=following`" target="_blank">
+          <div class="user-data-card">
+            <i class="fas fa-user-check"></i>
+            <div class="count">{{profile.following}}</div>
+            <div class="title">Following</div>
+          </div>
+        </a>
       </div>
 
     </div>
