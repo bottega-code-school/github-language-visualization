@@ -1,0 +1,12 @@
+.user-data-cards {
+  display: flex;
+
+  .user-data-card {
+    padding: 15px;
+    background-color: $offwhite;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+}

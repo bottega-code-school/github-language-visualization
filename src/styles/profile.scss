@@ -1,6 +1,7 @@
 .profile-wrapper {
   display: flex;
   justify-content: center;
+  margin-bottom: 42px;
 
   .profile-card {
     width: 100%;
@@ -10,34 +11,47 @@
     border-radius: 3px;
     box-shadow: 3px 3px 3px rgba(1, 1, 1, 0.5);
     display: flex;
+    justify-content: space-between;
 
-    .avatar {
-      img {
-        height: 150px;
-        border-radius: 50%;
-        border: 10px solid $dark-theme;
+    .left-column {
+      display: flex;
+
+      .avatar {
+        img {
+          height: 90px;
+          border-radius: 50%;
+          border: 5px solid $white;
+          box-shadow: 2px 2px 10px rgba(1, 1, 1, 0.42);
+        }
       }
-    }
 
-    .user-data {
-      display: grid;
-      grid-template-columns: 1fr;
-      grid-gap: 15px;
-      color: $dark-theme;
-
-      a {
+      .user-data {
         color: $dark-theme;
-        text-decoration: none;
-      }
+        margin-left: 21px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
 
-      .name {
-        font-size: 1.2em;
-        font-weight: 900;
-      }
+        a {
+          color: $dark-theme;
+          text-decoration: none;
+          transition: 0.5s ease-in-out;
 
-      .bio {
-        font-style: italic;
-        color: $primary;
+          &:hover {
+            color: $dark-theme-dark;
+          }
+        }
+
+        .name {
+          @include titillium-web-bold();
+          font-size: 1.4em;
+          margin-bottom: 15px;
+        }
+
+        .bio {
+          @include titillium-web-semibold();
+          color: $primary;
+        }
       }
     }
   }
