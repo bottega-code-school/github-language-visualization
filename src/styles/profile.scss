@@ -1,0 +1,20 @@
+.profile-wrapper {
+  display: flex;
+  justify-content: center;
+
+  .profile-card {
+    width: 100%;
+    background-color: $offwhite;
+    padding: 42px;
+    border: 1px solid $white;
+    border-radius: 3px;
+    box-shadow: 3px 3px 3px rgba(1, 1, 1, 0.5);
+    display: flex;
+
+    .avatar img {
+      width: 300px;
+      border-radius: 50%;
+      border: 10px solid $dark-theme;
+    }
+  }
+}
