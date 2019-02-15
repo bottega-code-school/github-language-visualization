@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <div class="app-container">
-      <!-- <pre>{{currentProfile}}</pre> -->
       <Search />
+      <Profile :profile="currentProfile" />
       <Graph v-if="currentRepoData.length > 0" v-bind="graphData" />
     </div>
   </div>
@@ -13,13 +13,15 @@ import { mapActions, mapGetters } from 'vuex';
 
 import Search from "./components/Search";
 import Graph from "./components/Graph";
+import Profile from "./components/Profile";
 
 export default {
   name: "App",
 
   components: {
     Graph,
-    Search
+    Search,
+    Profile
   },
 
   mounted() {

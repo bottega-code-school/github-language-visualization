@@ -17,7 +17,7 @@ export default {
 
   data() {
     return {
-      username: null
+      username: "jordanhudgens"
     }
   },
 
