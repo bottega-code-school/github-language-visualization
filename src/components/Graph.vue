@@ -15,6 +15,8 @@
 </template>
 
 <script>
+// TODO
+// integrate https://www.npmjs.com/package/d3-shape#stacks
 import _ from "lodash";
 import Popper from "popper.js";
 import { scaleTime, scaleLinear, scaleOrdinal } from "d3-scale";
