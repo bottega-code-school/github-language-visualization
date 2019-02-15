@@ -12,16 +12,36 @@
     background-color: $primary;
     margin: 21px;
     border-radius: 3px;
-    border: 1px solid $offwhite;
+    border: 1px solid $primary;
     color: $white;
+    transition: 0.5s ease-in-out;
 
     .title {
       font-size: 0.8em;
       text-transform: uppercase;
     }
 
+    .fas,
+    .far {
+      margin-bottom: 20px;
+      font-size: 1.5em;
+      color: $dark-primary;
+      transition: 0.5s ease-in-out;
+    }
+
     .count {
       font-size: 2em;
+    }
+
+    &:hover {
+      background-color: $dark-primary;
+      border: 1px solid $dark-primary;
+      box-shadow: 2px 2px 10px rgba(1, 1, 1, 0.42);
+
+      .fas,
+      .far {
+        color: $primary;
+      }
     }
   }
 }

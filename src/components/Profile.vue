@@ -20,27 +20,29 @@
       <div class="user-data-cards">
         <a href="/">
           <div class="user-data-card">
-            <div class="count">294</div>
+            <i class="fas fa-code"></i>
+            <div class="count">{{profile.public_repos}}</div>
             <div class="title">Repos</div>
           </div>
         </a>
 
         <div class="user-data-card">
-          <div class="count">390</div>
+          <i class="far fa-sticky-note"></i>
+          <div class="count">{{profile.public_gists}}</div>
           <div class="title">Gists</div>
         </div>
 
         <div class="user-data-card">
-          <div class="count">569</div>
+          <i class="fas fa-users"></i>
+          <div class="count">{{profile.followers}}</div>
           <div class="title">Followers</div>
         </div>
 
         <div class="user-data-card">
-          <div class="count">7</div>
+          <i class="fas fa-user-check"></i>
+          <div class="count">{{profile.following}}</div>
           <div class="title">Following</div>
         </div>
-
-        <!-- "public_repos": 294, "public_gists": 390, "followers": 569, "following": 7, -->
       </div>
 
     </div>
