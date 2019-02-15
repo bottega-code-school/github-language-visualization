@@ -11,10 +11,50 @@
     box-shadow: 3px 3px 3px rgba(1, 1, 1, 0.5);
     display: flex;
 
-    .avatar img {
-      width: 300px;
-      border-radius: 50%;
-      border: 10px solid $dark-theme;
+    .avatar {
+      img {
+        height: 150px;
+        border-radius: 50%;
+        border: 10px solid $dark-theme;
+      }
+    }
+
+    .user-data {
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-gap: 15px;
+      color: $dark-theme;
+
+      a {
+        color: $dark-theme;
+        text-decoration: none;
+      }
+
+      .name {
+        font-size: 1.2em;
+        font-weight: 900;
+      }
+
+      .bio {
+        font-style: italic;
+        color: $primary;
+      }
+    }
+  }
+
+  .loading-card {
+    width: 100%;
+    background-color: $offwhite;
+    padding: 42px;
+    border: 1px solid $white;
+    border-radius: 3px;
+    box-shadow: 3px 3px 3px rgba(1, 1, 1, 0.5);
+    display: flex;
+    justify-content: center;
+
+    .fas {
+      font-size: 2em;
+      color: $dark-theme;
     }
   }
 }
