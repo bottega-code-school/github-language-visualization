@@ -1,13 +1,12 @@
 .search-wrapper {
   display: flex;
-  width: 100%;
   justify-content: center;
   margin-top: 21px;
   margin-bottom: 21px;
 
   .search-form {
     display: flex;
-    width: 80%;
+    width: 100%;
     input {
       @include titillium-web-bold;
       color: $white;
