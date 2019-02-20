@@ -13,8 +13,9 @@
 <script>
 import { mapActions, mapGetters } from 'vuex';
 
+import VChart from "v-chart-plugin";
+
 import Search from "./components/Search";
-// import StackGraph from "./components/StackGraph";
 import AreaChart from "./components/AreaChart";
 import Profile from "./components/Profile";
 
@@ -24,7 +25,7 @@ export default {
   components: {
     AreaChart,
     Search,
-    Profile
+    Profile,
   },
 
   mounted() {
