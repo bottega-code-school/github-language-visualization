@@ -21,7 +21,7 @@
 import _ from "lodash";
 import Popper from "popper.js";
 import { scaleTime, scaleLinear, scaleOrdinal } from "d3-scale";
-import { line } from "d3-shape";
+import { line, stack } from "d3-shape";
 import { select, selectAll, mouse } from "d3-selection";
 import { bisector, extent, max } from "d3-array";
 import { axisBottom, axisLeft } from "d3-axis";
