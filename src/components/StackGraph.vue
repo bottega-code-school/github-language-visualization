@@ -9,12 +9,47 @@ export default {
       labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
       datasets: [
         {
-          label: 'GitHub Commits',
-          backgroundColor: '#f87979',
-          data: [40, 20, 12, 39, 10, 40, 39, 80, 40, 20, 12, 11]
+          type: 'line',
+          label: 'Budget',
+          backgroundColor: 'brown',
+          fill: false,
+          data: [1020, 1020, 1020, 1020, 1020, 350, 600, 1020, 1020, 1020, 1020, 1020]
+        },
+        {
+          type: 'bar',
+          label: 'Invoiced',
+          backgroundColor: '#12c44c',
+          data: [1050, 900, 1000, 850, 820, 420, 700, 1010, 999, 340, 0, 0]
+        },
+        {
+          type: 'bar',
+          label: 'Order',
+          backgroundColor: 'red',
+          data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 800, 120, 90]
         }
       ]
-    })
+    }, {
+        title: {
+          display: true,
+          text: 'GitHub Projects'
+        },
+        scales: {
+          yAxes: [{
+            stacked: true
+          }],
+          xAxes: [{
+            stacked: true,
+            categoryPercentage: 0.5,
+            barPercentage: 1
+          }]
+        },
+        legend: {
+          display: true
+        },
+        responsive: true,
+        maintainAspectRatio: false
+      }
+    )
   }
 }
 </script>

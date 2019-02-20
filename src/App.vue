@@ -4,7 +4,6 @@
       <Search />
       <Profile :profile="currentProfile" />
       <StackGraph />
-      <Graph v-if="currentRepoData.length > 0" v-bind="graphData" />
     </div>
   </div>
 </template>
@@ -13,7 +12,6 @@
 import { mapActions, mapGetters } from 'vuex';
 
 import Search from "./components/Search";
-import Graph from "./components/Graph";
 import StackGraph from "./components/StackGraph";
 import Profile from "./components/Profile";
 
@@ -21,7 +19,6 @@ export default {
   name: "App",
 
   components: {
-    Graph,
     StackGraph,
     Search,
     Profile
