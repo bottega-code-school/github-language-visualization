@@ -4,9 +4,7 @@
       <Search />
       <Profile :profile="currentProfile" />
 
-      <div class="graph-wrapper">
-        <StackGraph :graphData="graphData" :graphLabels="graphLabels" />
-      </div>
+      <StackGraph v-if="currentRepoData.length > 0" v-bind="graphData" />
     </div>
   </div>
 </template>
@@ -25,35 +23,6 @@ export default {
     StackGraph,
     Search,
     Profile
-  },
-
-  data() {
-    return {
-      graphLabels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-      graphData: [
-        {
-          type: 'line',
-          label: 'Budget',
-          backgroundColor: 'brown',
-          fill: false,
-          data: [1020, 1020, 1020, 1020, 1020, 350, 600, 1020, 1020, 1020, 1020, 1020]
-        },
-        {
-          type: 'line',
-          fill: true,
-          label: 'Invoiced',
-          backgroundColor: '#12c44c',
-          data: [1050, 900, 1000, 850, 820, 420, 700, 1010, 999, 340, 0, 0]
-        },
-        {
-          type: 'line',
-          fill: true,
-          label: 'Order',
-          backgroundColor: 'yellow',
-          data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 800, 120, 90]
-        }
-      ]
-    }
   },
 
   mounted() {

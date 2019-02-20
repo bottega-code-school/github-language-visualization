@@ -1,2 +1,145 @@
 .graph-wrapper {
+  display: flex;
+  .data-graph-legend,
+  .data-graph-chart {
+    flex-flow: row wrap;
+  }
+  .graph-tooltip {
+    flex-direction: column;
+  }
+
+  .data-graph-legend {
+    text-align: left;
+    width: 30%;
+    padding: 1.5rem;
+    color: $graph-axis;
+    border: 1px solid transparent;
+    border-left-color: $graph-border;
+    .legend-key {
+      @include titillium-web-semibold;
+      font-size: 1rem;
+      margin-bottom: 0.875rem;
+    }
+    ul {
+      padding: 0;
+      list-style-type: none;
+      li.legend-series {
+        @include titillium-web-regular;
+        font-size: 0.875rem;
+        margin-bottom: 0.875rem;
+        line-height: 1.3125rem;
+        height: 1.3125rem;
+        &:last-child {
+          margin-bottom: 0;
+        }
+        > div {
+          display: inline-block;
+        }
+        .legend-icon {
+          margin-right: 0.625rem;
+          width: 0.625rem;
+          height: 0.625rem;
+        }
+      }
+    }
+  }
+}
+
+.data-graph-chart {
+  font-size: 0.875rem;
+  position: relative;
+  svg {
+    width: 100% !important;
+  }
+  .invalid-options {
+    border: 1px solid red;
+    padding: 1rem;
+  }
+  .overlay {
+    fill: none;
+    pointer-events: all;
+  }
+  .line {
+    stroke-width: 2;
+    fill: none;
+  }
+  .tick {
+    line {
+      stroke: $graph-border;
+    }
+  }
+  .axis {
+    .tick {
+      text {
+        @include titillium-web-regular;
+        font-size: 0.75rem;
+        fill: $graph-axis;
+      }
+    }
+    &.y .domain {
+      display: none;
+    }
+  }
+  .tooltip-ref {
+    position: absolute;
+  }
+  .line-graph-label {
+    @include titillium-web-semibold;
+    font-size: 0.625rem;
+    text-transform: uppercase;
+    fill: $graph-axis;
+  }
+}
+
+.graph-tooltip {
+  @extend %transition-all-ease;
+  filter: drop-shadow(0 0px 2px $shadow-color);
+  display: none;
+  border: 1px solid $graph-border;
+  padding: 0;
+  background: $white;
+  max-width: 15rem;
+
+  .graph-tooltip-title {
+    @include titillium-web-semibold;
+    font-size: 0.875rem;
+    color: $graph-axis;
+    padding: 0.625rem 1rem;
+    line-height: 0.875rem;
+    border-bottom: 1px solid $graph-border;
+    text-align: left;
+  }
+
+  .series-container {
+    display: flex;
+    flex-flow: row wrap;
+    padding: 0.96875rem 1rem;
+    .series-row {
+      text-align: left;
+      width: 42%;
+      margin-bottom: 1rem;
+      padding-right: 1rem;
+      display: flex;
+      .color-bar {
+        margin-right: 0.59rem;
+        width: 4px;
+        height: 2rem;
+        line-height: 2rem;
+      }
+      .series-name {
+        @include titillium-web-regular;
+        @extend %truncate;
+        font-size: 0.75rem;
+        line-height: 0.875rem;
+        height: 0.875rem;
+        width: 4.5rem;
+      }
+      .series-value {
+        @include titillium-web-bold;
+        font-size: 1rem;
+        line-height: 0.875rem;
+        height: 0.875rem;
+      }
+    }
+  }
 }
