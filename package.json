@@ -27,7 +27,7 @@
     "node-sass": "^4.9.0",
     "sass-loader": "^7.1.0",
     "vue-template-compiler": "2.6.6",
-    "v-chart-plugin": "^1.0.1"
+    "v-chart-plugin": "0.3.0"
   },
   "heroku-run-build-script": true
 }

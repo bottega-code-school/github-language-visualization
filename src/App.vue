@@ -13,8 +13,6 @@
 <script>
 import { mapActions, mapGetters } from 'vuex';
 
-import VChart from "v-chart-plugin";
-
 import Search from "./components/Search";
 import AreaChart from "./components/AreaChart";
 import Profile from "./components/Profile";
