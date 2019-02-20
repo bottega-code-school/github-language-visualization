@@ -58,6 +58,7 @@ const d3 = {
   timeWeek,
   timeYear,
   line,
+  stack,
   schemeCategory10,
   scaleTime,
   scaleLinear,

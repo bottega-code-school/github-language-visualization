@@ -4,7 +4,8 @@
       <Search />
       <Profile :profile="currentProfile" />
 
-      <StackGraph v-if="currentRepoData.length > 0" v-bind="graphData" />
+      <AreaChart />
+      <!-- <StackGraph v-if="currentRepoData.length > 0" v-bind="graphData" /> -->
     </div>
   </div>
 </template>
@@ -13,14 +14,15 @@
 import { mapActions, mapGetters } from 'vuex';
 
 import Search from "./components/Search";
-import StackGraph from "./components/StackGraph";
+// import StackGraph from "./components/StackGraph";
+import AreaChart from "./components/AreaChart";
 import Profile from "./components/Profile";
 
 export default {
   name: "App",
 
   components: {
-    StackGraph,
+    AreaChart,
     Search,
     Profile
   },
