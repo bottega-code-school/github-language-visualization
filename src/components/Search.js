@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default class Search extends Component {
   constructor(props) {
@@ -34,7 +35,7 @@ export default class Search extends Component {
           />
 
           <button type="submit" className="search-button">
-            <i className="fas fa-search" />
+            <FontAwesomeIcon icon="search" />
           </button>
         </form>
       </div>
