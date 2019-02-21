@@ -1,11 +1,22 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
+
+import Search from "./Search";
+
+// <Profile profile={currentProfile} />
+
+// <AreaChart />
 
 export default class App extends Component {
+  constructor() {
+    super();
+  }
+
   render() {
     return (
-      <div className='app'>
-        <h1>DevCamp React Starter</h1>
-        <h2>React Redux Router</h2>
+      <div className="app">
+        <div className="app-container">
+          <Search />
+        </div>
       </div>
     );
   }

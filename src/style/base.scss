@@ -26,3 +26,10 @@ $transition-time: 0.1s;
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+h1,
+h2,
+h3,
+h4 {
+  @include titillium-web-semibold();
+}
