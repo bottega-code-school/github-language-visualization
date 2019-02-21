@@ -33,3 +33,12 @@ h3,
 h4 {
   @include titillium-web-semibold();
 }
+
+.loading {
+  width: 100%;
+  padding: 42px;
+  display: flex;
+  justify-content: center;
+  font-size: 2em;
+  color: white;
+}

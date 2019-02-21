@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
   faSignOutAlt,
@@ -41,6 +42,7 @@ export default class App extends Component {
     super();
 
     this.state = {
+      dataIsLoading: true,
       profileData: {}
     };
 
@@ -52,7 +54,8 @@ export default class App extends Component {
       .get(`https://api.github.com/users/${username}`)
       .then(response => {
         this.setState({
-          profileData: response.data
+          profileData: response.data,
+          dataIsLoading: false
         });
       })
       .catch(error => {
@@ -65,6 +68,14 @@ export default class App extends Component {
   }
 
   render() {
+    if (this.state.dataIsLoading) {
+      return (
+        <div className="loading">
+          <FontAwesomeIcon icon="spinner" spin />
+        </div>
+      );
+    }
+
     return (
       <div className="app">
         <div className="app-container">
