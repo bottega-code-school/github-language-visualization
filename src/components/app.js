@@ -3,11 +3,6 @@ import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
-  faSignOutAlt,
-  faAt,
-  faKey,
-  faEdit,
-  faTrash,
   faSpinner,
   faPlusCircle,
   faSearch,
@@ -18,11 +13,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
-  faSignOutAlt,
-  faAt,
-  faKey,
-  faTrash,
-  faEdit,
   faSpinner,
   faPlusCircle,
   faSearch,
@@ -34,8 +24,7 @@ library.add(
 
 import Search from "./Search";
 import Profile from "./Profile";
-
-// <AreaChart />
+import AreaChart from "./AreaChart";
 
 export default class App extends Component {
   constructor() {
@@ -81,6 +70,7 @@ export default class App extends Component {
         <div className="app-container">
           <Search handleUsernameSearch={this.handleUsernameSearch} />
           <Profile profile={this.state.profileData} />
+          <AreaChart />
         </div>
       </div>
     );
