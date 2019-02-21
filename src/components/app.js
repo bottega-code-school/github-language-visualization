@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import axios from "axios";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -32,13 +33,32 @@ import Search from "./Search";
 export default class App extends Component {
   constructor() {
     super();
+
+    this.state = {
+      profileData: {}
+    };
+
+    this.handleUsernameSearch = this.handleUsernameSearch.bind(this);
+  }
+
+  handleUsernameSearch(username) {
+    axios
+      .get(`https://api.github.com/users/${username}`)
+      .then(response => {
+        this.setState({
+          profileData: response.data
+        });
+      })
+      .catch(error => {
+        console.log("getUserProfileData", error);
+      });
   }
 
   render() {
     return (
       <div className="app">
         <div className="app-container">
-          <Search />
+          <Search handleUsernameSearch={this.handleUsernameSearch} />
         </div>
       </div>
     );

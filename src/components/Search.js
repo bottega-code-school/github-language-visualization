@@ -14,6 +14,7 @@ export default class Search extends Component {
   }
 
   handleSearch(event) {
+    this.props.handleUsernameSearch(this.state.username);
     event.preventDefault();
   }
 
