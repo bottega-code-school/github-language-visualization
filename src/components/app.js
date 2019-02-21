@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faSignOutAlt,
   faAt,
@@ -10,7 +9,11 @@ import {
   faTrash,
   faSpinner,
   faPlusCircle,
-  faSearch
+  faSearch,
+  faCode,
+  faStickyNote,
+  faUsers,
+  faUserCheck
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -21,12 +24,15 @@ library.add(
   faEdit,
   faSpinner,
   faPlusCircle,
-  faSearch
+  faSearch,
+  faCode,
+  faStickyNote,
+  faUsers,
+  faUserCheck
 );
 
 import Search from "./Search";
-
-// <Profile profile={currentProfile} />
+import Profile from "./Profile";
 
 // <AreaChart />
 
@@ -59,6 +65,7 @@ export default class App extends Component {
       <div className="app">
         <div className="app-container">
           <Search handleUsernameSearch={this.handleUsernameSearch} />
+          <Profile profile={this.state.profileData} />
         </div>
       </div>
     );
