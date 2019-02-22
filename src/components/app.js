@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import d3 from "d3";
+// import d3 from "d3";
 import { BarChart } from "react-d3-components";
 import axios from "axios";
 import _ from "lodash";
@@ -37,31 +37,48 @@ export default class App extends Component {
     super();
 
     this.state = {
+      profileIsLoading: true,
       dataIsLoading: true,
       profileData: {},
       chartData: [
         {
-          label: "somethingA",
+          label: "01/02/2018",
           values: [
-            { x: "SomethingA", y: 10 },
-            { x: "SomethingB", y: 4 },
-            { x: "SomethingC", y: 3 }
+            { x: "Ruby", y: 1, y0: 1 },
+            { x: "JavaScript", y: 9 },
+            { x: "Python", y: 2 },
+            { x: "HTML", y: 1 },
+            { x: "null", y: 3 }
           ]
         },
         {
-          label: "somethingB",
+          label: "01/03/2018",
           values: [
-            { x: "SomethingA", y: 6 },
-            { x: "SomethingB", y: 8 },
-            { x: "SomethingC", y: 5 }
+            { x: "Ruby", y: 3, y0: 1 },
+            { x: "JavaScript", y: 4 },
+            { x: "Python", y: 1 },
+            { x: "HTML", y: 2 },
+            { x: "null", y: 2 }
           ]
         },
         {
-          label: "somethingC",
+          label: "01/04/2018",
           values: [
-            { x: "SomethingA", y: 6 },
-            { x: "SomethingB", y: 8 },
-            { x: "SomethingC", y: 5 }
+            { x: "Ruby", y: 9, y0: 1 },
+            { x: "JavaScript", y: 1 },
+            { x: "Python", y: 2 },
+            { x: "HTML", y: 5 },
+            { x: "null", y: 1 }
+          ]
+        },
+        {
+          label: "01/05/2018",
+          values: [
+            { x: "Ruby", y: 1, y0: 1 },
+            { x: "JavaScript", y: 3 },
+            { x: "Python", y: 1 },
+            { x: "HTML", y: 2 },
+            { x: "null", y: 1 }
           ]
         }
       ]
@@ -111,43 +128,39 @@ export default class App extends Component {
           return repo;
         });
 
-        const groupByLanguage = _.groupBy(
+        const groupByProjectCreationDate = _.groupBy(
           responseWithFormattedRepoDates,
-          "language"
+          "created_at"
         );
-        const dataKeys = Object.keys(groupByLanguage);
+        const projectCreationDataKeys = Object.keys(groupByProjectCreationDate);
 
-        const visualizationDataObject = dataKeys
-          .map(language => {
-            const monthlyRepoObj = _.countBy(
-              groupByLanguage[language],
+        const projectCreationVisualizationObject = projectCreationDataKeys.map(
+          date => {
+            const repoCountsByLanguage = _.countBy(
+              groupByProjectCreationDate[date],
               repo => {
-                return repo.created_at;
+                return repo.language;
               }
             );
 
-            const monthlyRepoCounts = dateRangeArray.map(date => {
-              let dateFromRange = moment(date)
-                .startOf("month")
-                .format("DD/MM/YYYY");
-
+            const languageValueObject = Object.keys(
+              repoCountsByLanguage
+            ).map(language => {
               return {
-                date: dateFromRange,
-                value: monthlyRepoObj[dateFromRange] || 0
+                x: language,
+                y: repoCountsByLanguage[language]
               };
             });
 
             return {
-              name: language,
-              values: monthlyRepoCounts
+              label: date,
+              values: languageValueObject
             };
-          })
-          .reverse();
-
-        debugger;
+          }
+        );
 
         this.setState({
-          chartData: visualizationDataObject
+          dataIsLoading: false
         });
       })
       .catch(error => {
@@ -161,7 +174,7 @@ export default class App extends Component {
       .then(response => {
         this.setState({
           profileData: response.data,
-          dataIsLoading: false
+          profileIsLoading: false
         });
       })
       .catch(error => {
@@ -171,6 +184,7 @@ export default class App extends Component {
 
   componentDidMount() {
     this.handleUsernameSearch("jordanhudgens");
+    this.getData({ username: "jordanhudgens" });
   }
 
   tooltipConfig(x, y) {
@@ -178,7 +192,7 @@ export default class App extends Component {
   }
 
   render() {
-    if (this.state.dataIsLoading) {
+    if (this.state.profileIsLoading || this.state.dataIsLoading) {
       return (
         <div className="loading">
           <FontAwesomeIcon icon="spinner" spin />
@@ -186,7 +200,7 @@ export default class App extends Component {
       );
     }
 
-    this.getData({ username: "jordanhudgens" });
+    console.log("this.state.chartData", this.state.chartData);
 
     return (
       <div className="app">
@@ -194,13 +208,17 @@ export default class App extends Component {
           <Search handleUsernameSearch={this.handleUsernameSearch} />
           <Profile profile={this.state.profileData} />
 
-          <BarChart
-            data={this.state.chartData}
-            width={1200}
-            height={500}
-            tooltipHtml={this.tooltipConfig}
-            margin={{ top: 10, bottom: 50, left: 50, right: 10 }}
-          />
+          {this.state.dataIsLoading ? (
+            <FontAwesomeIcon icon="spinner" spin />
+          ) : (
+            <BarChart
+              data={this.state.chartData}
+              tooltipHtml={this.tooltipConfig}
+              width={1200}
+              height={500}
+              margin={{ top: 10, bottom: 50, left: 50, right: 10 }}
+            />
+          )}
         </div>
       </div>
     );
