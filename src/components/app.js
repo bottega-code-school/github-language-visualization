@@ -84,6 +84,10 @@ export default class App extends Component {
     this.handleUsernameSearch("jordanhudgens");
   }
 
+  tooltipConfig(x, y) {
+    return "x: " + x + " y: " + y;
+  }
+
   render() {
     if (this.state.dataIsLoading) {
       return (
@@ -104,6 +108,7 @@ export default class App extends Component {
             width={1200}
             height={500}
             yOrientation="right"
+            tooltipHtml={this.tooltipConfig}
             margin={{ top: 10, bottom: 50, left: 50, right: 10 }}
           />
         </div>
