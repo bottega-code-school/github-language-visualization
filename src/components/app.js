@@ -2,6 +2,11 @@ import React, { Component } from "react";
 import d3 from "d3";
 import { BarChart } from "react-d3-components";
 import axios from "axios";
+import _ from "lodash";
+import Moment from "moment";
+import { extendMoment } from "moment-range";
+const moment = extendMoment(Moment);
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
@@ -65,6 +70,91 @@ export default class App extends Component {
     this.handleUsernameSearch = this.handleUsernameSearch.bind(this);
   }
 
+  getData(filterObject) {
+    axios
+      .get(
+        `https://api.github.com/users/${filterObject.username}/repos?per_page=100&sort=updated`
+      )
+      .then(response => {
+        var startDate = filterObject.startDate || moment().subtract(1, "year");
+        var endDate = filterObject.endDate || moment();
+        var dateRangeArray = Array.from(
+          moment()
+            .range(startDate, endDate)
+            .by("month")
+        );
+
+        const filteredDateRange = response.data.filter(repo => {
+          let projectCreationDate = moment(repo.created_at);
+          if (
+            projectCreationDate >= startDate &&
+            projectCreationDate <= endDate
+          ) {
+            return true;
+          } else {
+            return false;
+          }
+        });
+
+        const reposSortedByDate = filteredDateRange.sort(function compare(
+          prev,
+          next
+        ) {
+          return moment(prev.created_at) - moment(next.created_at);
+        });
+
+        const responseWithFormattedRepoDates = reposSortedByDate.map(repo => {
+          repo.created_at = moment(repo.created_at)
+            .startOf("month")
+            .format("DD/MM/YYYY");
+
+          return repo;
+        });
+
+        const groupByLanguage = _.groupBy(
+          responseWithFormattedRepoDates,
+          "language"
+        );
+        const dataKeys = Object.keys(groupByLanguage);
+
+        const visualizationDataObject = dataKeys
+          .map(language => {
+            const monthlyRepoObj = _.countBy(
+              groupByLanguage[language],
+              repo => {
+                return repo.created_at;
+              }
+            );
+
+            const monthlyRepoCounts = dateRangeArray.map(date => {
+              let dateFromRange = moment(date)
+                .startOf("month")
+                .format("DD/MM/YYYY");
+
+              return {
+                date: dateFromRange,
+                value: monthlyRepoObj[dateFromRange] || 0
+              };
+            });
+
+            return {
+              name: language,
+              values: monthlyRepoCounts
+            };
+          })
+          .reverse();
+
+        debugger;
+
+        this.setState({
+          chartData: visualizationDataObject
+        });
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+
   handleUsernameSearch(username) {
     axios
       .get(`https://api.github.com/users/${username}`)
@@ -95,6 +185,8 @@ export default class App extends Component {
         </div>
       );
     }
+
+    this.getData({ username: "jordanhudgens" });
 
     return (
       <div className="app">
