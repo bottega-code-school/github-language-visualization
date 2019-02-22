@@ -51,6 +51,7 @@
     "copy-webpack-plugin": "^4.5.2",
     "cross-env": "^5.2.0",
     "css-loader": "^1.0.0",
+    "d3": "^5.9.1",
     "draft-js": "^0.10.5",
     "draftjs-to-html": "^0.8.4",
     "eslint": "^4.2.0",
