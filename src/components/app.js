@@ -42,7 +42,8 @@ export default class App extends Component {
       profileData: {},
       chartData: [],
       currentUsername: "jordanhudgens",
-      width: 0
+      width: 0,
+      followers: []
     };
 
     this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
@@ -57,7 +58,9 @@ export default class App extends Component {
           .currentUsername}/followers?page=1`
       )
       .then(response => {
-        console.log("response for followers", response);
+        this.setState({
+          followers: this.state.followers.concat(response.data)
+        });
       })
       .catch(error => {
         console.log("getFollowers error", error);
@@ -194,6 +197,10 @@ export default class App extends Component {
       );
     }
 
+    const followerCharts = this.state.followers.map(follower => {
+      return <div>{follower.login}</div>;
+    });
+
     return (
       <div className="app">
         <div className="app-container">
@@ -210,6 +217,8 @@ export default class App extends Component {
               chartData={this.state.chartData}
             />
           </div>
+
+          <div className="follower-charts">{followerCharts}</div>
         </div>
       </div>
     );
