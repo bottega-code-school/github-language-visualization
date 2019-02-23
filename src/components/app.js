@@ -237,7 +237,7 @@ export default class App extends Component {
             <StackedBarChart
               width={this.state.width - 100}
               height={400}
-              chartData={this.state.chartData}
+              username={this.state.currentUsername}
             />
           </div>
         </div>
