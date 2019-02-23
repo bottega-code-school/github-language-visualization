@@ -1,14 +1,13 @@
 body {
+  margin: 0px;
   background-color: $dark-theme;
   @include titillium-web-semibold();
 }
 
-#app {
-  display: flex;
-  justify-content: center;
-
+.app {
+  width: 100vw;
   .app-container {
-    width: 1500px;
+    padding: 10px 20px;
   }
 }
 

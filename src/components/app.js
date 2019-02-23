@@ -180,7 +180,7 @@ export default class App extends Component {
 
           <div className="bar-chart-wrapper">
             <StackedBarChart
-              width={this.state.width - 42}
+              width={this.state.width - 100}
               height={400}
               chartData={this.state.chartData}
             />

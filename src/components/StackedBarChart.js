@@ -25,10 +25,10 @@ const StackedBarChart = ({
   height,
   events = false,
   margin = {
-    top: 40,
+    top: 20,
     left: 50,
     right: 40,
-    bottom: 100
+    bottom: 30
   },
   chartData,
   tooltipOpen,
