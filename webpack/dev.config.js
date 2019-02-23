@@ -9,7 +9,6 @@ const proxyRules = require("../proxy/rules");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const DefinePlugin = require("webpack/lib/DefinePlugin");
 const HotModuleReplacementPlugin = require("webpack/lib/HotModuleReplacementPlugin");
-const Dotenv = require("dotenv-webpack");
 
 module.exports = webpackMerge(webpackCommon, {
   devtool: "inline-source-map",
@@ -64,10 +63,7 @@ module.exports = webpackMerge(webpackCommon, {
       template: path.resolve(__dirname, "../static/index.html"),
       favicon: path.resolve(__dirname, "../static/favicon.ico")
     }),
-    new HotModuleReplacementPlugin(),
-    new Dotenv({
-      path: path.resolve(__dirname, "..", ".env")
-    })
+    new HotModuleReplacementPlugin()
   ],
 
   devServer: {

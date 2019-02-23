@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 
 import StackedBarChart from "./StackedBarChart";
+import config from "../config/keys";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -51,8 +52,7 @@ export default class App extends Component {
     axios
       .get(
         `https://api.github.com/users/${this.state
-          .currentUsername}/followers?page=1&client_id=${process.env
-          .GITHUB_CLIENT_ID}&client_secret=${process.env.GITHUB_CLIENT_SECRET}`
+          .currentUsername}/followers?page=1&client_id=${config.githubId}&client_secret=${config.githubSecret}`
       )
       .then(response => {
         this.setState({
@@ -73,8 +73,7 @@ export default class App extends Component {
 
     axios
       .get(
-        `https://api.github.com/users/${username}?client_id=${process.env
-          .GITHUB_CLIENT_ID}&client_secret=${process.env.GITHUB_CLIENT_SECRET}`
+        `https://api.github.com/users/${username}?client_id=${config.githubId}&client_secret=${config.githubSecret}`
       )
       .then(response => {
         this.setState({
@@ -89,6 +88,8 @@ export default class App extends Component {
   }
 
   componentDidMount() {
+    console.log("githubId", config.githubId);
+    console.log("githubId", config.githubSecret);
     this.handleUsernameSearch(this.state.currentUsername);
     this.getFollowers();
     this.updateWindowDimensions();
