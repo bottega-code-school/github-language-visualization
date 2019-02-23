@@ -51,7 +51,8 @@ export default class App extends Component {
     axios
       .get(
         `https://api.github.com/users/${this.state
-          .currentUsername}/followers?page=1`
+          .currentUsername}/followers?page=1&client_id=${process.env
+          .GITHUB_CLIENT_ID}&client_secret=${process.env.GITHUB_CLIENT_SECRET}`
       )
       .then(response => {
         this.setState({
@@ -71,7 +72,10 @@ export default class App extends Component {
     });
 
     axios
-      .get(`https://api.github.com/users/${username}`)
+      .get(
+        `https://api.github.com/users/${username}?client_id=${process.env
+          .GITHUB_CLIENT_ID}&client_secret=${process.env.GITHUB_CLIENT_SECRET}`
+      )
       .then(response => {
         this.setState({
           profileData: response.data,
@@ -110,7 +114,7 @@ export default class App extends Component {
 
     const followerCharts = this.state.followers.map(follower => {
       return (
-        <div className="follower-chart-item">
+        <div className="follower-chart-item" key={follower.login}>
           <div className="follower-avatar">
             <a href={`https://github.com/${follower.login}`} target="_blank">
               <img src={follower.avatar_url} alt={follower.login} />

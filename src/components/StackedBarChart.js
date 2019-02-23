@@ -44,7 +44,8 @@ class StackedBarChart extends Component {
     axios
       .get(
         `https://api.github.com/users/${this.props
-          .username}/repos?per_page=100&sort=updated`
+          .username}/repos?per_page=100&sort=updated&client_id=${process.env
+          .GITHUB_CLIENT_ID}&client_secret=${process.env.GITHUB_CLIENT_SECRET}`
       )
       .then(response => {
         var startDate = this.props.startDate || moment().subtract(1, "year");
@@ -155,7 +156,11 @@ class StackedBarChart extends Component {
     const { chartData } = this.state;
 
     if (chartData.length === 0) {
-      return <h1>This user has no public repos for that date range</h1>;
+      return (
+        <h2>
+          This user didn't create any new public repos for the given date range
+        </h2>
+      );
     }
 
     const keys = Object.keys(chartData[0]).filter(d => d !== "date");
