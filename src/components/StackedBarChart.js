@@ -15,6 +15,8 @@ const color3 = "#86BBD8";
 const color4 = "#2F4858";
 const color5 = "#F6AE2D";
 const color6 = "#F26419";
+const color7 = "#a16eb2";
+const color8 = "#ac3a3a";
 const darkThemeColor = "#21282f";
 const bg = "transparent";
 
@@ -65,7 +67,7 @@ const StackedBarChart = ({
   });
   const color = scaleOrdinal({
     domain: keys,
-    range: [color1, color2, color3, color4, color5, color6]
+    range: [color1, color2, color3, color4, color5, color6, color7, color8]
   });
 
   let tooltipTimeout;
