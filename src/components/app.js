@@ -110,19 +110,12 @@ export default class App extends Component {
               }
             );
 
-            const languageValueObject = Object.keys(
-              repoCountsByLanguage
-            ).map(language => {
-              return {
-                x: language,
-                y: repoCountsByLanguage[language]
-              };
-            });
-
             const finalDataObj = { date: date };
 
             languages.forEach(language => {
-              finalDataObj[language] = 5;
+              if (language !== "null") {
+                finalDataObj[language] = repoCountsByLanguage[language] || 0;
+              }
             });
 
             return finalDataObj;
@@ -186,7 +179,11 @@ export default class App extends Component {
           <Profile profile={this.state.profileData} />
 
           <div className="bar-chart-wrapper">
-            <StackedBarChart width={this.state.width - 42} height={400} />
+            <StackedBarChart
+              width={this.state.width - 42}
+              height={400}
+              chartData={this.state.chartData}
+            />
           </div>
         </div>
       </div>
