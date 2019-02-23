@@ -1,0 +1,36 @@
+.follower-charts {
+  margin: 42px 0px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 42px;
+
+  .follower-chart-item {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+
+    .follower-avatar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      img {
+        height: 90px;
+        border-radius: 50%;
+        border: 5px solid $white;
+        box-shadow: 2px 2px 10px rgba(1, 1, 1, 0.42);
+        transition: 0.5s ease-in-out;
+        cursor: pointer;
+        &:hover {
+          box-shadow: 0px 0px 0px rgba(1, 1, 1, 0);
+        }
+      }
+    }
+
+    .follower-chart-wrapper {
+      background-color: $offwhite;
+      padding: 21px 21px 0px 21px;
+      border-radius: 3px;
+      box-shadow: 3px 3px 3px rgba(1, 1, 1, 0.5);
+    }
+  }
+}

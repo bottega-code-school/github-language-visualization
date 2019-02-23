@@ -198,7 +198,19 @@ export default class App extends Component {
     }
 
     const followerCharts = this.state.followers.map(follower => {
-      return <div>{follower.login}</div>;
+      return (
+        <div className="follower-chart-item">
+          <div className="follower-avatar">
+            <img src={follower.avatar_url} alt={follower.login} />
+
+            <div className="follower-username">{follower.login}</div>
+          </div>
+
+          <div className="follower-chart-wrapper">
+            <h1>Chart goes here...</h1>
+          </div>
+        </div>
+      );
     });
 
     return (
