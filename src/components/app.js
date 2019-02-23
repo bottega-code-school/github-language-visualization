@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-// import d3 from "d3";
-import { BarChart } from "react-d3-components";
 import axios from "axios";
 import _ from "lodash";
 import Moment from "moment";
 import { extendMoment } from "moment-range";
 const moment = extendMoment(Moment);
+
+import StackedBarChart from "./StackedBarChart";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -40,50 +40,11 @@ export default class App extends Component {
       profileIsLoading: true,
       dataIsLoading: true,
       profileData: {},
-      chartData: [
-        {
-          label: "01/02/2018",
-          values: [
-            { x: "Ruby", y: 1, y0: 1 },
-            { x: "JavaScript", y: 9 },
-            { x: "Python", y: 2 },
-            { x: "HTML", y: 1 },
-            { x: "null", y: 3 }
-          ]
-        },
-        {
-          label: "01/03/2018",
-          values: [
-            { x: "Ruby", y: 3, y0: 1 },
-            { x: "JavaScript", y: 4 },
-            { x: "Python", y: 1 },
-            { x: "HTML", y: 2 },
-            { x: "null", y: 2 }
-          ]
-        },
-        {
-          label: "01/04/2018",
-          values: [
-            { x: "Ruby", y: 9, y0: 1 },
-            { x: "JavaScript", y: 1 },
-            { x: "Python", y: 2 },
-            { x: "HTML", y: 5 },
-            { x: "null", y: 1 }
-          ]
-        },
-        {
-          label: "01/05/2018",
-          values: [
-            { x: "Ruby", y: 1, y0: 1 },
-            { x: "JavaScript", y: 3 },
-            { x: "Python", y: 1 },
-            { x: "HTML", y: 2 },
-            { x: "null", y: 1 }
-          ]
-        }
-      ]
+      chartData: [],
+      width: 0
     };
 
+    this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
     this.handleUsernameSearch = this.handleUsernameSearch.bind(this);
   }
 
@@ -185,10 +146,16 @@ export default class App extends Component {
   componentDidMount() {
     this.handleUsernameSearch("jordanhudgens");
     this.getData({ username: "jordanhudgens" });
+    this.updateWindowDimensions();
+    window.addEventListener("resize", this.updateWindowDimensions);
   }
 
-  tooltipConfig(x, y) {
-    return "x: " + x + " y: " + y;
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.updateWindowDimensions);
+  }
+
+  updateWindowDimensions() {
+    this.setState({ width: window.innerWidth, height: window.innerHeight });
   }
 
   render() {
@@ -208,17 +175,9 @@ export default class App extends Component {
           <Search handleUsernameSearch={this.handleUsernameSearch} />
           <Profile profile={this.state.profileData} />
 
-          {this.state.dataIsLoading ? (
-            <FontAwesomeIcon icon="spinner" spin />
-          ) : (
-            <BarChart
-              data={this.state.chartData}
-              tooltipHtml={this.tooltipConfig}
-              width={1200}
-              height={500}
-              margin={{ top: 10, bottom: 50, left: 50, right: 10 }}
-            />
-          )}
+          <div className="bar-chart-wrapper">
+            <StackedBarChart width={this.state.width - 42} height={400} />
+          </div>
         </div>
       </div>
     );
