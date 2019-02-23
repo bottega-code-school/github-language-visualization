@@ -1,9 +1,5 @@
 import React, { Component } from "react";
 import axios from "axios";
-import _ from "lodash";
-import Moment from "moment";
-import { extendMoment } from "moment-range";
-const moment = extendMoment(Moment);
 
 import StackedBarChart from "./StackedBarChart";
 
@@ -67,90 +63,6 @@ export default class App extends Component {
       });
   }
 
-  getData(filterObject) {
-    axios
-      .get(
-        `https://api.github.com/users/${filterObject.username}/repos?per_page=100&sort=updated`
-      )
-      .then(response => {
-        var startDate = filterObject.startDate || moment().subtract(1, "year");
-        var endDate = filterObject.endDate || moment();
-        var dateRangeArray = Array.from(
-          moment()
-            .range(startDate, endDate)
-            .by("month")
-        );
-
-        const filteredDateRange = response.data.filter(repo => {
-          let projectCreationDate = moment(repo.created_at);
-          if (
-            projectCreationDate >= startDate &&
-            projectCreationDate <= endDate
-          ) {
-            return true;
-          } else {
-            return false;
-          }
-        });
-
-        const reposSortedByDate = filteredDateRange.sort(function compare(
-          prev,
-          next
-        ) {
-          return moment(prev.created_at) - moment(next.created_at);
-        });
-
-        const responseWithFormattedRepoDates = reposSortedByDate.map(repo => {
-          repo.created_at = moment(repo.created_at)
-            .startOf("month")
-            .format("DD/MM/YYYY");
-
-          return repo;
-        });
-
-        const groupByProjectCreationDate = _.groupBy(
-          responseWithFormattedRepoDates,
-          "created_at"
-        );
-        const projectCreationDataKeys = Object.keys(groupByProjectCreationDate);
-
-        const groupByLanguage = _.groupBy(
-          responseWithFormattedRepoDates,
-          "language"
-        );
-        const languages = Object.keys(groupByLanguage);
-
-        const projectCreationVisualizationObject = projectCreationDataKeys.map(
-          date => {
-            const repoCountsByLanguage = _.countBy(
-              groupByProjectCreationDate[date],
-              repo => {
-                return repo.language;
-              }
-            );
-
-            const finalDataObj = { date: date };
-
-            languages.forEach(language => {
-              if (language !== "null") {
-                finalDataObj[language] = repoCountsByLanguage[language] || 0;
-              }
-            });
-
-            return finalDataObj;
-          }
-        );
-
-        this.setState({
-          dataIsLoading: false,
-          chartData: projectCreationVisualizationObject
-        });
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  }
-
   handleUsernameSearch(username) {
     this.setState({
       profileIsLoading: true,
@@ -163,9 +75,9 @@ export default class App extends Component {
       .then(response => {
         this.setState({
           profileData: response.data,
-          profileIsLoading: false
+          profileIsLoading: false,
+          currentUsername: username
         });
-        this.getData({ username: username });
       })
       .catch(error => {
         console.log("getUserProfileData", error);
@@ -174,7 +86,6 @@ export default class App extends Component {
 
   componentDidMount() {
     this.handleUsernameSearch(this.state.currentUsername);
-    this.getData({ username: this.state.currentUsername });
     this.getFollowers();
     this.updateWindowDimensions();
     window.addEventListener("resize", this.updateWindowDimensions);
@@ -189,7 +100,7 @@ export default class App extends Component {
   }
 
   render() {
-    if (this.state.profileIsLoading || this.state.dataIsLoading) {
+    if (this.state.profileIsLoading) {
       return (
         <div className="loading">
           <FontAwesomeIcon icon="spinner" spin />
