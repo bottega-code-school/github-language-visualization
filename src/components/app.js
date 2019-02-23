@@ -95,6 +95,12 @@ export default class App extends Component {
         );
         const projectCreationDataKeys = Object.keys(groupByProjectCreationDate);
 
+        const groupByLanguage = _.groupBy(
+          responseWithFormattedRepoDates,
+          "language"
+        );
+        const languages = Object.keys(groupByLanguage);
+
         const projectCreationVisualizationObject = projectCreationDataKeys.map(
           date => {
             const repoCountsByLanguage = _.countBy(
@@ -113,15 +119,19 @@ export default class App extends Component {
               };
             });
 
-            return {
-              label: date,
-              values: languageValueObject
-            };
+            const finalDataObj = { date: date };
+
+            languages.forEach(language => {
+              finalDataObj[language] = 5;
+            });
+
+            return finalDataObj;
           }
         );
 
         this.setState({
-          dataIsLoading: false
+          dataIsLoading: false,
+          chartData: projectCreationVisualizationObject
         });
       })
       .catch(error => {
