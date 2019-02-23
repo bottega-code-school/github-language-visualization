@@ -46,8 +46,8 @@ const StackedBarChart = ({
     return ret;
   }, []);
 
-  const parseDate = timeParse("%Y%m%d");
-  const format = timeFormat("%b %d");
+  const parseDate = timeParse("%d/%m/%Y");
+  const format = timeFormat("%b %Y");
   const formatDate = date => format(parseDate(date));
 
   // accessors
