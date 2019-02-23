@@ -15,6 +15,7 @@ const color3 = "#86BBD8";
 const color4 = "#2F4858";
 const color5 = "#F6AE2D";
 const color6 = "#F26419";
+const darkThemeColor = "#21282f";
 const bg = "transparent";
 
 const StackedBarChart = ({
@@ -47,7 +48,7 @@ const StackedBarChart = ({
   }, []);
 
   const parseDate = timeParse("%d/%m/%Y");
-  const format = timeFormat("%b %Y");
+  const format = timeFormat("%b %y");
   const formatDate = date => format(parseDate(date));
 
   // accessors
@@ -133,10 +134,10 @@ const StackedBarChart = ({
             hideTicks={true}
             scale={yScale}
             tickFormat={formatDate}
-            stroke={color1}
-            tickStroke={color1}
+            stroke={darkThemeColor}
+            tickStroke={darkThemeColor}
             tickLabelProps={(value, index) => ({
-              fill: color1,
+              fill: darkThemeColor,
               fontSize: 11,
               textAnchor: "end",
               dy: "0.33em"
@@ -145,10 +146,10 @@ const StackedBarChart = ({
           <AxisBottom
             top={yMax}
             scale={xScale}
-            stroke={color1}
-            tickStroke={color1}
+            stroke={darkThemeColor}
+            tickStroke={darkThemeColor}
             tickLabelProps={(value, index) => ({
-              fill: color1,
+              fill: darkThemeColor,
               fontSize: 11,
               textAnchor: "middle"
             })}
@@ -180,7 +181,7 @@ const StackedBarChart = ({
           <div style={{ color: color(tooltipData.key) }}>
             <strong>{tooltipData.key}</strong>
           </div>
-          <div>{tooltipData.bar.data[tooltipData.key]}</div>
+          <div>{tooltipData.bar.data[tooltipData.key]} new projects</div>
           <div>
             <small>{formatDate(y(tooltipData.bar.data))}</small>
           </div>
