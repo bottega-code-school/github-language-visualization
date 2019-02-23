@@ -153,6 +153,11 @@ class StackedBarChart extends Component {
     } = this.props;
 
     const { chartData } = this.state;
+
+    if (chartData.length === 0) {
+      return <h1>This user has no public repos for that date range</h1>;
+    }
+
     const keys = Object.keys(chartData[0]).filter(d => d !== "date");
 
     const totals = chartData.reduce((ret, cur) => {

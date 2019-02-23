@@ -127,14 +127,13 @@ export default class App extends Component {
             <StackedBarChart
               width={this.state.width - 300}
               height={400}
-              username={"jordanhudgens"}
+              username={follower.login}
             />
           </div>
         </div>
       );
     });
 
-    // <div className="follower-charts">{followerCharts}</div>
     return (
       <div className="app">
         <div className="app-container">
@@ -151,6 +150,8 @@ export default class App extends Component {
               username={this.state.currentUsername}
             />
           </div>
+
+          <div className="follower-charts">{followerCharts}</div>
         </div>
       </div>
     );
