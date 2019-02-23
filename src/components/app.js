@@ -201,9 +201,15 @@ export default class App extends Component {
       return (
         <div className="follower-chart-item">
           <div className="follower-avatar">
-            <img src={follower.avatar_url} alt={follower.login} />
+            <a href={`https://github.com/${follower.login}`} target="_blank">
+              <img src={follower.avatar_url} alt={follower.login} />
+            </a>
 
-            <div className="follower-username">{follower.login}</div>
+            <div className="follower-username">
+              <a href={`https://github.com/${follower.login}`} target="_blank">
+                {follower.login}
+              </a>
+            </div>
           </div>
 
           <div className="follower-chart-wrapper">
