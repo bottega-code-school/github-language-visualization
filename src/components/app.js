@@ -41,12 +41,27 @@ export default class App extends Component {
       dataIsLoading: true,
       profileData: {},
       chartData: [],
-      currentUsername: "",
+      currentUsername: "jordanhudgens",
       width: 0
     };
 
     this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
     this.handleUsernameSearch = this.handleUsernameSearch.bind(this);
+  }
+
+  getFollowers() {
+    // Add pagination with infinite scroll
+    axios
+      .get(
+        `https://api.github.com/users/${this.state
+          .currentUsername}/followers?page=1`
+      )
+      .then(response => {
+        console.log("response for followers", response);
+      })
+      .catch(error => {
+        console.log("getFollowers error", error);
+      });
   }
 
   getData(filterObject) {
@@ -155,8 +170,9 @@ export default class App extends Component {
   }
 
   componentDidMount() {
-    this.handleUsernameSearch("jordanhudgens");
-    this.getData({ username: "jordanhudgens" });
+    this.handleUsernameSearch(this.state.currentUsername);
+    this.getData({ username: this.state.currentUsername });
+    this.getFollowers();
     this.updateWindowDimensions();
     window.addEventListener("resize", this.updateWindowDimensions);
   }
