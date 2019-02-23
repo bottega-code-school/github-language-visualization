@@ -17,37 +17,6 @@ const color5 = "#F6AE2D";
 const color6 = "#F26419";
 const bg = "transparent";
 
-const data = [
-  {
-    date: "20111001",
-    Ruby: "63.4",
-    Python: "62.7",
-    JavaScript: "72.2",
-    Elixir: 0
-  },
-  {
-    date: "20111002",
-    Ruby: "58.0",
-    Python: "59.9",
-    JavaScript: "67.7",
-    Elixir: 0
-  },
-  {
-    date: "20111003",
-    Ruby: "53.3",
-    Python: "59.1",
-    JavaScript: "69.4",
-    Elixir: 0
-  },
-  {
-    date: "20111004",
-    Ruby: "55.7",
-    Python: "58.8",
-    JavaScript: "68.0",
-    Elixir: 1
-  }
-];
-
 const StackedBarChart = ({
   width,
   height,
@@ -108,8 +77,6 @@ const StackedBarChart = ({
 
   xScale.rangeRound([0, xMax]);
   yScale.rangeRound([yMax, 0]);
-
-  console.log("data", data);
 
   return (
     <div style={{ position: "relative" }}>
