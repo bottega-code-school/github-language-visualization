@@ -6,7 +6,7 @@ export default class Search extends Component {
     super(props);
 
     this.state = {
-      username: "jordanhudgens"
+      username: props.username || "jordanhudgens"
     };
 
     this.handleSearchInputChange = this.handleSearchInputChange.bind(this);

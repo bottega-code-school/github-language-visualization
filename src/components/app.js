@@ -41,6 +41,7 @@ export default class App extends Component {
       dataIsLoading: true,
       profileData: {},
       chartData: [],
+      currentUsername: "",
       width: 0
     };
 
@@ -133,6 +134,12 @@ export default class App extends Component {
   }
 
   handleUsernameSearch(username) {
+    this.setState({
+      profileIsLoading: true,
+      dataIsLoading: true,
+      currentUsername: username
+    });
+
     axios
       .get(`https://api.github.com/users/${username}`)
       .then(response => {
@@ -140,6 +147,7 @@ export default class App extends Component {
           profileData: response.data,
           profileIsLoading: false
         });
+        this.getData({ username: username });
       })
       .catch(error => {
         console.log("getUserProfileData", error);
@@ -170,12 +178,13 @@ export default class App extends Component {
       );
     }
 
-    console.log("this.state.chartData", this.state.chartData);
-
     return (
       <div className="app">
         <div className="app-container">
-          <Search handleUsernameSearch={this.handleUsernameSearch} />
+          <Search
+            handleUsernameSearch={this.handleUsernameSearch}
+            username={this.state.currentUsername}
+          />
           <Profile profile={this.state.profileData} />
 
           <div className="bar-chart-wrapper">
