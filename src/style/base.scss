@@ -35,10 +35,16 @@ h4 {
 }
 
 .loading {
-  width: 100%;
+  width: calc(100% - 142px);
   padding: 42px;
   display: flex;
   justify-content: center;
   font-size: 2em;
   color: white;
+  flex-direction: column;
+
+  h2 {
+    font-size: 0.8em;
+    word-wrap: break-word;
+  }
 }

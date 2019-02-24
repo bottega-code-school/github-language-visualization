@@ -47,7 +47,8 @@ export default class App extends Component {
       followers: [],
       startDate: moment().subtract(1, "year"),
       endDate: moment(),
-      shouldRefreshData: false
+      shouldRefreshData: false,
+      usernameNotFound: ""
     };
 
     this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
@@ -92,7 +93,8 @@ export default class App extends Component {
     this.setState({
       profileIsLoading: true,
       dataIsLoading: true,
-      currentUsername: username
+      currentUsername: username,
+      usernameNotFound: ""
     });
 
     axios
@@ -109,6 +111,9 @@ export default class App extends Component {
         this.getFollowers();
       })
       .catch(error => {
+        this.setState({
+          usernameNotFound: username
+        });
         console.log("getUserProfileData", error);
       });
   }
@@ -129,6 +134,21 @@ export default class App extends Component {
   }
 
   render() {
+    if (this.state.usernameNotFound) {
+      return (
+        <div className="loading">
+          <Search
+            handleUsernameSearch={this.handleUsernameSearch}
+            username={this.state.currentUsername}
+          />
+          <h2>
+            It looks like GitHub doesn't have a user with the username:{" "}
+            {this.state.usernameNotFound}. Please try again.
+          </h2>
+        </div>
+      );
+    }
+
     if (this.state.profileIsLoading) {
       return (
         <div className="loading">
