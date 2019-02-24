@@ -20,7 +20,9 @@
   }
   .vx-legend {
     display: grid !important;
-    grid-template-columns: 1fr 1fr 1fr !important;
+    grid-template-columns: 1fr 1fr 1fr 1fr !important;
+    font-size: 0.8em;
+    margin-left: 55px;
   }
 
   .follower-chart-wrapper,
