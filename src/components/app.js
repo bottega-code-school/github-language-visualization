@@ -89,8 +89,10 @@ export default class App extends Component {
 
   componentDidMount() {
     console.log("process.env.NODE_ENV", process.env.NODE_ENV);
+    console.log("process.env.all", process.env);
     console.log("githubId", config.githubId);
     console.log("githubId", config.githubSecret);
+    console.log("demoEnv", config.demoEnv);
     this.handleUsernameSearch(this.state.currentUsername);
     this.getFollowers();
     this.updateWindowDimensions();
