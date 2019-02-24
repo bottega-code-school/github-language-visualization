@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 
 import StackedBarChart from "./StackedBarChart";
-import config from "../config/keys";
+import config from "../../config/keys";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";

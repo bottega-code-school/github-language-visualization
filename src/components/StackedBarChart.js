@@ -12,7 +12,7 @@ import { timeParse, timeFormat } from "d3-time-format";
 import { withTooltip, Tooltip } from "@vx/tooltip";
 import { LegendOrdinal } from "@vx/legend";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import config from "../config/keys";
+import config from "../../config/keys";
 
 // Custom color spectrum generated from:
 // https://coolors.co/
