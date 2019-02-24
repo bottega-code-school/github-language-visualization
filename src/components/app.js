@@ -4,6 +4,7 @@ import moment from "moment";
 
 import StackedBarChart from "./StackedBarChart";
 import DateRangeSlider from "./DateRangeSlider";
+import LanguageCloud from "./LanguageCloud";
 import config from "../../config/keys";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -213,6 +214,8 @@ export default class App extends Component {
             handleDateRangeFilter={dateObj =>
               this.handleDateRangeFilter(dateObj)}
           />
+
+          <LanguageCloud />
 
           <Profile profile={this.state.profileData} />
 
