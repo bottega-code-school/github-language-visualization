@@ -4,17 +4,25 @@
 @import "input-range-label-container";
 @import "input-range-track";
 
-.input-range {
-  height: $input-range-slider-height;
-  position: relative;
-  width: 100%;
-}
-
 .date-range-slider-form {
   display: flex;
   align-items: center;
   height: 120px;
   padding: 0px 30px 0px 15px;
+
+  .grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 200px;
+    grid-gap: 42px;
+    align-items: center;
+
+    .input-range {
+      height: $input-range-slider-height;
+      position: relative;
+      width: 100%;
+    }
+  }
 }
 
 .input-range__slider {

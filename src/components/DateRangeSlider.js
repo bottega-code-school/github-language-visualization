@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import InputRange from "react-marker-slider";
 import moment from "moment";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default class DateRangeSlider extends Component {
   constructor(props) {
@@ -20,19 +21,33 @@ export default class DateRangeSlider extends Component {
     };
   }
 
+  handleFormSubmit(e) {
+    console.log("form submitted", this.state.value);
+    e.preventDefault();
+  }
+
   render() {
     return (
-      <form className="date-range-slider-form">
-        <InputRange
-          draggableTrack
-          maxValue={this.state.formMax}
-          minValue={this.state.formMin}
-          step={25920000}
-          formatLabel={value => `${moment(value).format("MMM YY")}`}
-          onChange={value => this.setState({ value: value })}
-          onChangeComplete={value => console.log(value)}
-          value={this.state.value}
-        />
+      <form
+        className="date-range-slider-form"
+        onSubmit={e => this.handleFormSubmit(e)}
+      >
+        <div className="grid">
+          <InputRange
+            draggableTrack
+            maxValue={this.state.formMax}
+            minValue={this.state.formMin}
+            step={25920000}
+            formatLabel={value => `${moment(value).format("MMM 'YY")}`}
+            onChange={value => this.setState({ value: value })}
+            value={this.state.value}
+          />
+
+          <button className="btn">
+            <span className="text">Filter by Date</span>
+            <FontAwesomeIcon icon="calendar-alt" />
+          </button>
+        </div>
       </form>
     );
   }

@@ -14,7 +14,8 @@ import {
   faCode,
   faStickyNote,
   faUsers,
-  faUserCheck
+  faUserCheck,
+  faCalendarAlt
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -24,7 +25,8 @@ library.add(
   faCode,
   faStickyNote,
   faUsers,
-  faUserCheck
+  faUserCheck,
+  faCalendarAlt
 );
 
 import Search from "./Search";
