@@ -20,6 +20,7 @@ const LanguageCloud = props => {
         data={data}
         fontSizeMapper={fontSizeMapper}
         rotate={rotate}
+        onWordClick={word => props.handleWordCloudClick(word)}
       />
     </div>
   );

@@ -50,12 +50,25 @@ export default class App extends Component {
       startDate: moment().subtract(1, "year"),
       endDate: moment(),
       shouldRefreshData: false,
-      usernameNotFound: ""
+      usernameNotFound: "",
+      languageTotals: {}
     };
 
     this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
     this.handleUsernameSearch = this.handleUsernameSearch.bind(this);
     this.handleDateRangeFilter = this.handleDateRangeFilter.bind(this);
+    this.handleWordCloudClick = this.handleWordCloudClick.bind(this);
+    this.updateLanguageTotals = this.updateLanguageTotals.bind(this);
+  }
+
+  updateLanguageTotals(languageObject) {
+    // TODO
+    // Update language totals
+    console.log("updateLanguageTotals", languageObject);
+  }
+
+  handleWordCloudClick(word) {
+    console.log("handleWordCloudClick", word);
   }
 
   refreshData() {
@@ -188,6 +201,7 @@ export default class App extends Component {
 
           <div className="follower-chart-wrapper">
             <StackedBarChart
+              updateLanguageTotals={this.updateLanguageTotals}
               width={this.state.followerChartWidth}
               height={400}
               username={follower.login}
@@ -215,12 +229,13 @@ export default class App extends Component {
               this.handleDateRangeFilter(dateObj)}
           />
 
-          <LanguageCloud />
+          <LanguageCloud handleWordCloudClick={this.handleWordCloudClick} />
 
           <Profile profile={this.state.profileData} />
 
           <div className="bar-chart-wrapper">
             <StackedBarChart
+              updateLanguageTotals={this.updateLanguageTotals}
               width={this.state.width}
               height={400}
               username={this.state.currentUsername}

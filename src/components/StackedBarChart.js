@@ -36,7 +36,8 @@ class StackedBarChart extends Component {
 
     this.state = {
       chartData: [],
-      dataIsLoading: true
+      dataIsLoading: true,
+      languageTotals: []
     };
   }
 
@@ -120,6 +121,9 @@ class StackedBarChart extends Component {
 
             languages.forEach(language => {
               if (language !== "null") {
+                this.setState({
+                  languageTotals: this.state.languageTotals.concat(language)
+                });
                 finalDataObj[language] = repoCountsByLanguage[language] || 0;
               }
             });
@@ -127,6 +131,8 @@ class StackedBarChart extends Component {
             return finalDataObj;
           }
         );
+
+        this.props.updateLanguageTotals(this.state.languageTotals);
 
         this.setState({
           dataIsLoading: false,
