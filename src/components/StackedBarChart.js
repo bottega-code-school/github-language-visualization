@@ -305,6 +305,11 @@ class StackedBarChart extends Component {
             />
           </Group>
         </svg>
+        <div className="chart-description">
+          Projects created between{" "}
+          {moment(this.props.startDate).format("MM/YYYY")} and{" "}
+          {moment(this.props.endDate).format("MM/YYYY")}
+        </div>
         <div
           style={{
             position: "absolute",

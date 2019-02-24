@@ -4,3 +4,11 @@
   border-radius: 3px;
   box-shadow: 3px 3px 3px rgba(1, 1, 1, 0.5);
 }
+
+.chart-description {
+  width: 100%;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  color: $dark-primary;
+}
