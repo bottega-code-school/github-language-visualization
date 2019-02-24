@@ -22,13 +22,13 @@ export default class DateRangeSlider extends Component {
 
   render() {
     return (
-      <form className="form">
+      <form className="date-range-slider-form">
         <InputRange
           draggableTrack
           maxValue={this.state.formMax}
           minValue={this.state.formMin}
           step={25920000}
-          formatLabel={value => `${moment(value).format()}`}
+          formatLabel={value => `${moment(value).format("MMM YY")}`}
           onChange={value => this.setState({ value: value })}
           onChangeComplete={value => console.log(value)}
           value={this.state.value}
