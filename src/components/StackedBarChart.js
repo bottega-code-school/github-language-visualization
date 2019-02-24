@@ -169,9 +169,9 @@ class StackedBarChart extends Component {
 
     if (chartData.length === 0) {
       return (
-        <h2>
+        <div className="no-projects">
           This user didn't create any new public repos for the given date range
-        </h2>
+        </div>
       );
     }
 

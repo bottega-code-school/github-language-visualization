@@ -23,9 +23,37 @@
     grid-template-columns: 1fr 1fr 1fr !important;
   }
 
+  .follower-chart-wrapper,
   .bar-chart-wrapper {
+    .no-projects {
+      display: flex !important;
+      justify-content: center !important;
+      font-size: 1.2em;
+      margin-bottom: 21px;
+    }
     svg {
-      margin-top: 70px;
+      margin-top: 70px !important;
+    }
+  }
+
+  .follower-chart-wrapper {
+    width: calc(100% - 60px);
+  }
+
+  .follower-charts {
+    .follower-chart-item {
+      grid-template-columns: 1fr;
+      grid-gap: 15px;
+
+      .follower-avatar {
+        flex-direction: row;
+        align-items: center;
+        .follower-username {
+          margin-top: 0px;
+          margin-left: 15px;
+          font-size: 1.1em;
+        }
+      }
     }
   }
 }

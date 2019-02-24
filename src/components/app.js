@@ -44,6 +44,7 @@ export default class App extends Component {
       chartData: [],
       currentUsername: "jordanhudgens",
       width: 0,
+      followerChartWidth: 0,
       followers: [],
       startDate: moment().subtract(1, "year"),
       endDate: moment(),
@@ -130,7 +131,19 @@ export default class App extends Component {
   }
 
   updateWindowDimensions() {
-    this.setState({ width: window.innerWidth, height: window.innerHeight });
+    if (window.innerWidth > 500) {
+      this.setState({
+        width: window.innerWidth - 100,
+        followerChartWidth: window.innerWidth - 300,
+        height: window.innerHeight
+      });
+    } else {
+      this.setState({
+        width: window.innerWidth - 50,
+        followerChartWidth: window.innerWidth - 65,
+        height: window.innerHeight
+      });
+    }
   }
 
   render() {
@@ -174,7 +187,7 @@ export default class App extends Component {
 
           <div className="follower-chart-wrapper">
             <StackedBarChart
-              width={this.state.width - 300}
+              width={this.state.followerChartWidth}
               height={400}
               username={follower.login}
               startDate={this.state.startDate}
@@ -205,7 +218,7 @@ export default class App extends Component {
 
           <div className="bar-chart-wrapper">
             <StackedBarChart
-              width={this.state.width - 100}
+              width={this.state.width}
               height={400}
               username={this.state.currentUsername}
               startDate={this.state.startDate}
