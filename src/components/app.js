@@ -59,7 +59,7 @@ export default class App extends Component {
       )
       .then(response => {
         this.setState({
-          followers: this.state.followers.concat(response.data)
+          followers: response.data
         });
       })
       .catch(error => {
@@ -84,6 +84,8 @@ export default class App extends Component {
           profileIsLoading: false,
           currentUsername: username
         });
+
+        this.getFollowers();
       })
       .catch(error => {
         console.log("getUserProfileData", error);
