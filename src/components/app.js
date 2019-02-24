@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import moment from "moment";
 
 import StackedBarChart from "./StackedBarChart";
 import DateRangeSlider from "./DateRangeSlider";
@@ -43,15 +44,35 @@ export default class App extends Component {
       chartData: [],
       currentUsername: "jordanhudgens",
       width: 0,
-      followers: []
+      followers: [],
+      startDate: moment().subtract(1, "year"),
+      endDate: moment(),
+      shouldRefreshData: false
     };
 
     this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
     this.handleUsernameSearch = this.handleUsernameSearch.bind(this);
+    this.handleDateRangeFilter = this.handleDateRangeFilter.bind(this);
+  }
+
+  refreshData() {
+    this.setState({
+      shouldRefreshData: true
+    });
+  }
+
+  handleDateRangeFilter(dateObject) {
+    this.setState({
+      startDate: moment(dateObject.min),
+      endDate: moment(dateObject.max)
+    });
+
+    this.refreshData();
   }
 
   getFollowers() {
     // Add pagination with infinite scroll
+    // Needs to be able to concat new records and not replace the current list
     axios
       .get(
         `https://api.github.com/users/${this.state
@@ -136,6 +157,9 @@ export default class App extends Component {
               width={this.state.width - 300}
               height={400}
               username={follower.login}
+              startDate={this.state.startDate}
+              endDate={this.state.endDate}
+              refreshData={this.state.shouldRefreshData}
             />
           </div>
         </div>
@@ -150,7 +174,10 @@ export default class App extends Component {
             username={this.state.currentUsername}
           />
 
-          <DateRangeSlider />
+          <DateRangeSlider
+            handleDateRangeFilter={dateObj =>
+              this.handleDateRangeFilter(dateObj)}
+          />
 
           <Profile profile={this.state.profileData} />
 
@@ -159,6 +186,9 @@ export default class App extends Component {
               width={this.state.width - 100}
               height={400}
               username={this.state.currentUsername}
+              startDate={this.state.startDate}
+              endDate={this.state.endDate}
+              refreshData={this.state.shouldRefreshData}
             />
           </div>
 

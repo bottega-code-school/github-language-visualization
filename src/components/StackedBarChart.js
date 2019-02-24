@@ -41,6 +41,15 @@ class StackedBarChart extends Component {
     this.getData();
   }
 
+  componentDidUpdate(prevProps) {
+    if (
+      prevProps.startDate !== this.props.startDate ||
+      prevProps.endDate !== this.props.endDate
+    ) {
+      this.getData();
+    }
+  }
+
   getData() {
     axios
       .get(
@@ -48,8 +57,8 @@ class StackedBarChart extends Component {
           .username}/repos?per_page=100&sort=updated&client_id=${config.githubId}5&client_secret=${config.githubSecret}5`
       )
       .then(response => {
-        var startDate = this.props.startDate || moment().subtract(1, "year");
-        var endDate = this.props.endDate || moment();
+        var startDate = this.props.startDate;
+        var endDate = this.props.endDate;
         var dateRangeArray = Array.from(
           moment()
             .range(startDate, endDate)

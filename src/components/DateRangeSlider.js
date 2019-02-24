@@ -22,7 +22,7 @@ export default class DateRangeSlider extends Component {
   }
 
   handleFormSubmit(e) {
-    console.log("form submitted", this.state.value);
+    this.props.handleDateRangeFilter(this.state.value);
     e.preventDefault();
   }
 
