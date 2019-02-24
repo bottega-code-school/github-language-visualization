@@ -92,14 +92,6 @@ module.exports = webpackMerge(webpackCommon, {
       root: path.resolve(__dirname, ".."),
       exclude: ".gitignore"
     }),
-    new DefinePlugin({
-      "process.env": {
-        NODE_ENV: '"production"',
-        GITHUB_CLIENT_ID: null,
-        GITHUB_CLIENT_SECRET: null,
-        REACT_APP_DEMO_TEST: 123
-      }
-    }),
     new ExtractTextPlugin("[name]-[chunkhash].min.css"),
     new UglifyJsPlugin({
       uglifyOptions: {
