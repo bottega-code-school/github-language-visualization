@@ -187,6 +187,16 @@ class StackedBarChart extends Component {
     const format = timeFormat("%b %y");
     const formatDate = date => format(parseDate(date));
 
+    const formatProjectCount = projectCount => {
+      const numberIsDecimal = projectCount - Math.floor(projectCount) !== 0;
+
+      if (numberIsDecimal) {
+        return "";
+      } else {
+        return Number(projectCount);
+      }
+    };
+
     // accessors
     const y = d => d.date;
 
@@ -282,8 +292,11 @@ class StackedBarChart extends Component {
             <AxisBottom
               top={yMax}
               scale={xScale}
+              hideTicks={true}
               stroke={darkThemeColor}
               tickStroke={darkThemeColor}
+              tickFormat={formatProjectCount}
+              hideZero={true}
               tickLabelProps={(value, index) => ({
                 fill: darkThemeColor,
                 fontSize: 11,
