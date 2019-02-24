@@ -175,6 +175,8 @@ export default class App extends Component {
           />
 
           <DateRangeSlider
+            defaultStartDate={this.state.startDate}
+            defaultEndDate={this.state.endDate}
             handleDateRangeFilter={dateObj =>
               this.handleDateRangeFilter(dateObj)}
           />

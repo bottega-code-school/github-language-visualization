@@ -13,10 +13,12 @@ export default class DateRangeSlider extends Component {
         .valueOf(),
       formMax: moment().valueOf(),
       value: {
-        min: moment()
-          .subtract(1, "year")
-          .valueOf(),
-        max: moment().valueOf()
+        min:
+          this.props.defaultStartDate ||
+          moment()
+            .subtract(1, "year")
+            .valueOf(),
+        max: this.props.defaultEndDate || moment().valueOf()
       }
     };
   }
