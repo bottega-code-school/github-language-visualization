@@ -1,12 +1,39 @@
-import React from "react";
+import React, { Component } from "react";
+import InputRange from "react-marker-slider";
+import moment from "moment";
 
-const DateRangeSlider = props => {
-  return (
-    <div>
-      <h1>Range slider</h1>
-      <h2>react-input-range</h2>
-    </div>
-  );
-};
+export default class DateRangeSlider extends Component {
+  constructor(props) {
+    super(props);
 
-export default DateRangeSlider;
+    this.state = {
+      formMin: moment()
+        .subtract(5, "years")
+        .valueOf(),
+      formMax: moment().valueOf(),
+      value: {
+        min: moment()
+          .subtract(1, "year")
+          .valueOf(),
+        max: moment().valueOf()
+      }
+    };
+  }
+
+  render() {
+    return (
+      <form className="form">
+        <InputRange
+          draggableTrack
+          maxValue={this.state.formMax}
+          minValue={this.state.formMin}
+          step={25920000}
+          formatLabel={value => `${moment(value).format()}`}
+          onChange={value => this.setState({ value: value })}
+          onChangeComplete={value => console.log(value)}
+          value={this.state.value}
+        />
+      </form>
+    );
+  }
+}
