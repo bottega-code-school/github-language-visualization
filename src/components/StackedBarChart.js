@@ -45,7 +45,7 @@ class StackedBarChart extends Component {
     axios
       .get(
         `https://api.github.com/users/${this.props
-          .username}/repos?per_page=100&sort=updated&client_id=${config.githubId}&client_secret=${config.githubSecret}`
+          .username}/repos?per_page=100&sort=updated&client_id=${config.githubId}5&client_secret=${config.githubSecret}5`
       )
       .then(response => {
         var startDate = this.props.startDate || moment().subtract(1, "year");

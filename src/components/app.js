@@ -52,7 +52,7 @@ export default class App extends Component {
     axios
       .get(
         `https://api.github.com/users/${this.state
-          .currentUsername}/followers?page=1&client_id=${config.githubId}&client_secret=${config.githubSecret}`
+          .currentUsername}/followers?page=1&client_id=${config.githubId}5&client_secret=${config.githubSecret}5`
       )
       .then(response => {
         this.setState({
@@ -73,7 +73,7 @@ export default class App extends Component {
 
     axios
       .get(
-        `https://api.github.com/users/${username}?client_id=${config.githubId}&client_secret=${config.githubSecret}`
+        `https://api.github.com/users/${username}?client_id=${config.githubId}5&client_secret=${config.githubSecret}5`
       )
       .then(response => {
         this.setState({
@@ -88,11 +88,6 @@ export default class App extends Component {
   }
 
   componentDidMount() {
-    console.log("process.env.NODE_ENV", process.env.NODE_ENV);
-    console.log("process.env.all", process.env);
-    console.log("githubId", config.githubId);
-    console.log("githubId", config.githubSecret);
-    console.log("demoTest", process.env.REACT_APP_DEMO_TEST);
     this.handleUsernameSearch(this.state.currentUsername);
     this.getFollowers();
     this.updateWindowDimensions();

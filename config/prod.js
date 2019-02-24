@@ -1,4 +1,4 @@
 module.exports = {
-  githubId: process.env.GITHUB_CLIENT_ID || "",
-  githubSecret: process.env.GITHUB_CLIENT_SECRET || ""
+  githubId: "b70daa774350d3777d2",
+  githubSecret: "bae3e88d632043813139a18f9d8e91efb293aaa"
 };
