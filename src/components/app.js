@@ -214,7 +214,17 @@ export default class App extends Component {
             />
           </div>
 
-          <div className="follower-charts">{followerCharts}</div>
+          {followerCharts && followerCharts.length > 0 ? (
+            <div className="follower-charts">
+              <div className="follower-wrapper-heading">
+                <FontAwesomeIcon icon="users" />
+                <span className="text">
+                  {this.state.currentUsername}'s follower data
+                </span>
+              </div>
+              {followerCharts}
+            </div>
+          ) : null}
         </div>
       </div>
     );

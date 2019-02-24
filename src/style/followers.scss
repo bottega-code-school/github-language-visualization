@@ -4,6 +4,19 @@
   grid-template-columns: 1fr;
   grid-gap: 42px;
 
+  .follower-wrapper-heading {
+    color: $offwhite;
+    font-weight: 900;
+    font-size: 2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .text {
+      margin-left: 21px;
+    }
+  }
+
   .follower-chart-item {
     display: grid;
     grid-template-columns: 200px 1fr;

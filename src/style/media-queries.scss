@@ -1,0 +1,31 @@
+@media (max-width: 48em) {
+  .date-range-slider-form {
+    margin: 70px 0px 42px 0px;
+    .grid {
+      grid-template-columns: 1fr;
+      grid-gap: 60px;
+
+      .btn {
+        height: 60px;
+      }
+    }
+  }
+
+  .profile-card {
+    flex-direction: column;
+    .user-data-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  .vx-legend {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr 1fr !important;
+  }
+
+  .bar-chart-wrapper {
+    svg {
+      margin-top: 70px;
+    }
+  }
+}
