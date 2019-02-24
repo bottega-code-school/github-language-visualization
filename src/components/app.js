@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 
 import StackedBarChart from "./StackedBarChart";
+import DateRangeSlider from "./DateRangeSlider";
 import config from "../../config/keys";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -144,6 +145,9 @@ export default class App extends Component {
             handleUsernameSearch={this.handleUsernameSearch}
             username={this.state.currentUsername}
           />
+
+          <DateRangeSlider />
+
           <Profile profile={this.state.profileData} />
 
           <div className="bar-chart-wrapper">

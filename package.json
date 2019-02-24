@@ -77,6 +77,8 @@
     "moment-range": "^4.0.1",
     "node-sass": "^4.9.2",
     "postcss-loader": "^2.1.6",
+    "rc-slider": "^8.6.6",
+    "rc-tooltip": "^3.7.3",
     "react": "^16.4.2",
     "react-d3-components": "^0.9.1",
     "react-dom": "^16.4.2",
