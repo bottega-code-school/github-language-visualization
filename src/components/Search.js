@@ -15,7 +15,7 @@ export default class Search extends Component {
   }
 
   handleCloudClick() {
-    console.log("clieakjsdfhaksdfadfasdf asdf");
+    this.props.toggleLanguageCloud();
   }
 
   handleSearch(event) {

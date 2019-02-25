@@ -54,7 +54,8 @@ export default class App extends Component {
       shouldRefreshData: false,
       usernameNotFound: "",
       languageTotals: {},
-      languagesFormattedForWordCloud: []
+      languagesFormattedForWordCloud: [],
+      languageCloudIsOpen: false
     };
 
     this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
@@ -62,6 +63,13 @@ export default class App extends Component {
     this.handleDateRangeFilter = this.handleDateRangeFilter.bind(this);
     this.handleWordCloudClick = this.handleWordCloudClick.bind(this);
     this.updateLanguageTotals = this.updateLanguageTotals.bind(this);
+    this.toggleLanguageCloud = this.toggleLanguageCloud.bind(this);
+  }
+
+  toggleLanguageCloud() {
+    this.setState({
+      languageCloudIsOpen: !this.state.languageCloudIsOpen
+    });
   }
 
   updateLanguageTotals(languageArray) {
@@ -247,6 +255,7 @@ export default class App extends Component {
           <Search
             handleUsernameSearch={this.handleUsernameSearch}
             username={this.state.currentUsername}
+            toggleLanguageCloud={this.toggleLanguageCloud}
           />
 
           <DateRangeSlider
@@ -256,7 +265,8 @@ export default class App extends Component {
               this.handleDateRangeFilter(dateObj)}
           />
 
-          {Object.keys(this.state.languageTotals).length > 0 ? (
+          {this.state.languageCloudIsOpen &&
+          Object.keys(this.state.languageTotals).length > 0 ? (
             <LanguageCloud
               data={this.state.languagesFormattedForWordCloud}
               handleWordCloudClick={this.handleWordCloudClick}
