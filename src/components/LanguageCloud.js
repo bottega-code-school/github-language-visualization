@@ -1,11 +1,18 @@
 import React from "react";
 import WordCloud from "react-d3-cloud";
+import _ from "lodash";
 
 const LanguageCloud = props => {
   const fontSizeMapper = word => Math.log2(word.value) * 5;
   const rotate = word => word.value % 21;
 
-  const languagesWithCounts = props.data.map(language => {
+  const languageCountsSortedByCount = _.orderBy(
+    props.data,
+    ["value", "text"],
+    ["desc", "asc"]
+  );
+
+  const languagesWithCounts = languageCountsSortedByCount.map(language => {
     return (
       <div className="language-count-item">
         <span className="text">{language.text}</span>{" "}
