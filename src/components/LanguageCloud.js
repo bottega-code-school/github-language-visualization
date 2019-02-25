@@ -2,8 +2,8 @@ import React from "react";
 import WordCloud from "react-d3-cloud";
 
 const LanguageCloud = props => {
-  const fontSizeMapper = word => Math.log2(word.value) * 5;
-  const rotate = word => word.value % 42;
+  const fontSizeMapper = word => Math.log2(word.value) * 15;
+  const rotate = word => word.value % 21;
 
   return (
     <div className="word-cloud-wrapper">

@@ -79,22 +79,12 @@ export default class App extends Component {
       }
     });
 
-    const data = [
-      { text: "Hey", value: 1000 },
-      { text: "lol", value: 200 },
-      { text: "first impression", value: 800 },
-      { text: "very cool", value: 1000000 },
-      { text: "duck", value: 10 }
-    ];
-
     const formattedTotals = _.map(currentLanguageTotals, function(value, key) {
       return {
         text: key,
         value: value
       };
     });
-
-    // console.log("formattedTotals", )
 
     this.setState({
       languageTotals: currentLanguageTotals,
@@ -144,7 +134,9 @@ export default class App extends Component {
       profileIsLoading: true,
       dataIsLoading: true,
       currentUsername: username,
-      usernameNotFound: ""
+      usernameNotFound: "",
+      languageTotals: {},
+      languagesFormattedForWordCloud: []
     });
 
     axios
