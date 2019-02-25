@@ -268,6 +268,7 @@ export default class App extends Component {
           {this.state.languageCloudIsOpen &&
           Object.keys(this.state.languageTotals).length > 0 ? (
             <LanguageCloud
+              width={this.state.width}
               data={this.state.languagesFormattedForWordCloud}
               handleWordCloudClick={this.handleWordCloudClick}
             />

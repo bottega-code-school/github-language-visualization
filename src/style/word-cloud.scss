@@ -4,7 +4,7 @@
   margin-bottom: 21px;
 
   .word-cloud-card {
-    width: 100%;
+    width: calc(100% - 42px);
     background-color: $offwhite;
     padding: 21px 42px;
     border: 1px solid $white;
@@ -12,7 +12,6 @@
     box-shadow: 3px 3px 3px rgba(1, 1, 1, 0.5);
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-gap: 42px;
 
     .right-column {
       display: flex;

@@ -26,6 +26,8 @@ const LanguageCloud = props => {
       <div className="word-cloud-card">
         <div className="left-column">
           <WordCloud
+            width={props.width > 700 ? props.width - 400 : props.width}
+            height={600}
             font={"Titillium Web"}
             data={props.data}
             fontSizeMapper={fontSizeMapper}
