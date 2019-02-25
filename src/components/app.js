@@ -51,7 +51,8 @@ export default class App extends Component {
       endDate: moment(),
       shouldRefreshData: false,
       usernameNotFound: "",
-      languageTotals: {}
+      languageTotals: {},
+      languagesFormattedForWordCloud: []
     };
 
     this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
@@ -61,10 +62,44 @@ export default class App extends Component {
     this.updateLanguageTotals = this.updateLanguageTotals.bind(this);
   }
 
-  updateLanguageTotals(languageObject) {
-    // TODO
-    // Update language totals
-    console.log("updateLanguageTotals", languageObject);
+  updateLanguageTotals(languageArray) {
+    const receivedLanguageTotals = _.countBy(
+      languageArray,
+      language => language
+    );
+
+    const currentLanguages = Object.keys(this.state.languageTotals);
+    const currentLanguageTotals = this.state.languageTotals;
+
+    _.forEach(receivedLanguageTotals, function(value, key) {
+      if (currentLanguages.includes(key)) {
+        currentLanguageTotals[key] = currentLanguageTotals[key] + value;
+      } else {
+        currentLanguageTotals[key] = value;
+      }
+    });
+
+    const data = [
+      { text: "Hey", value: 1000 },
+      { text: "lol", value: 200 },
+      { text: "first impression", value: 800 },
+      { text: "very cool", value: 1000000 },
+      { text: "duck", value: 10 }
+    ];
+
+    const formattedTotals = _.map(currentLanguageTotals, function(value, key) {
+      return {
+        text: key,
+        value: value
+      };
+    });
+
+    // console.log("formattedTotals", )
+
+    this.setState({
+      languageTotals: currentLanguageTotals,
+      languagesFormattedForWordCloud: formattedTotals
+    });
   }
 
   handleWordCloudClick(word) {
@@ -229,7 +264,12 @@ export default class App extends Component {
               this.handleDateRangeFilter(dateObj)}
           />
 
-          <LanguageCloud handleWordCloudClick={this.handleWordCloudClick} />
+          {Object.keys(this.state.languageTotals).length > 0 ? (
+            <LanguageCloud
+              data={this.state.languagesFormattedForWordCloud}
+              handleWordCloudClick={this.handleWordCloudClick}
+            />
+          ) : null}
 
           <Profile profile={this.state.profileData} />
 
