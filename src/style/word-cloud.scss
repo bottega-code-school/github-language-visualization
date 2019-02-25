@@ -1,0 +1,52 @@
+.word-cloud-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 21px;
+
+  .word-cloud-card {
+    width: 100%;
+    background-color: $offwhite;
+    padding: 21px 42px;
+    border: 1px solid $white;
+    border-radius: 3px;
+    box-shadow: 3px 3px 3px rgba(1, 1, 1, 0.5);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 42px;
+
+    .right-column {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+
+      .title {
+        font-size: 1.3em;
+        color: $primary;
+        font-weight: 900;
+        text-align: center;
+        padding: 21px;
+        border-bottom: 2px solid $primary;
+        margin-bottom: 21px;
+      }
+
+      .language-breakdown {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-gap: 21px;
+        text-align: center;
+
+        .language-count-item {
+          margin-right: 42px;
+          .text {
+            font-weight: 900;
+            color: $dark-theme;
+          }
+          .value {
+            font-size: 1.2em;
+          }
+        }
+      }
+    }
+  }
+}

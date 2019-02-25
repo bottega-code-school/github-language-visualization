@@ -112,12 +112,10 @@ export default class App extends Component {
   }
 
   getFollowers() {
-    // Add pagination with infinite scroll
-    // Needs to be able to concat new records and not replace the current list
     axios
       .get(
         `https://api.github.com/users/${this.state
-          .currentUsername}/followers?page=1&client_id=${config.githubId}5&client_secret=${config.githubSecret}5`
+          .currentUsername}/followers?page=1&per_page=50&client_id=${config.githubId}5&client_secret=${config.githubSecret}5`
       )
       .then(response => {
         this.setState({
