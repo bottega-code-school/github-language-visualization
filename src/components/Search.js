@@ -11,6 +11,11 @@ export default class Search extends Component {
 
     this.handleSearchInputChange = this.handleSearchInputChange.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
+    this.handleCloudClick = this.handleCloudClick.bind(this);
+  }
+
+  handleCloudClick() {
+    console.log("clieakjsdfhaksdfadfasdf asdf");
   }
 
   handleSearch(event) {
@@ -39,6 +44,12 @@ export default class Search extends Component {
             <FontAwesomeIcon icon="search" />
           </button>
         </form>
+
+        <div className="text-cloud-toggle">
+          <a onClick={this.handleCloudClick}>
+            <FontAwesomeIcon icon="cloud" />
+          </a>
+        </div>
       </div>
     );
   }

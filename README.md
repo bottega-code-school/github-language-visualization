@@ -22,6 +22,6 @@
 
 ### For an A, you will need to add:
 
-- [ ] Compare the selected temporal variable to other variables (that you think it is useful). 
-- [ ] Find some interesting events in the data and highlight them on your webpage through screen snapshots.
+- [x] Compare the selected temporal variable to other variables (that you think it is useful). 
+- [x] Find some interesting events in the data and highlight them on your webpage through screen snapshots.
 - [ ] Plot a time series with requested features on the graph, such as a sudden drop or pump.
